@@ -13,15 +13,27 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-Hans">
+    <html data-theme="dark" lang="zh-Hans">
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport" />
         <Meta />
         <Links />
       </head>
-      <body>
-        <div className="mx-auto flex h-dvh max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-zinc-950 md:border-x">
+      <body className="relative h-dvh">
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundColor: '#0a0a0a',
+            backgroundImage: `
+       radial-gradient(circle at 25% 25%, #222222 0.5px, transparent 1px),
+       radial-gradient(circle at 75% 75%, #111111 0.5px, transparent 1px)
+     `,
+            backgroundSize: '10px 10px',
+            imageRendering: 'pixelated',
+          }}
+        />
+        <div className="mx-auto flex h-full max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-emerald-600! bg-zinc-950 md:border-x">
           {children}
         </div>
         <ScrollRestoration />
