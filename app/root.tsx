@@ -24,16 +24,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundColor: '#0a0a0a',
+            background: '#000000',
             backgroundImage: `
-       radial-gradient(circle at 25% 25%, #222222 0.5px, transparent 1px),
-       radial-gradient(circle at 75% 75%, #111111 0.5px, transparent 1px)
-     `,
-            backgroundSize: '10px 10px',
-            imageRendering: 'pixelated',
+        linear-gradient(to right, rgba(75, 85, 99, 0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(75, 85, 99, 0.4) 1px, transparent 1px)
+      `,
+            backgroundSize: '40px 40px',
           }}
         />
-        <div className="mx-auto flex h-full max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-emerald-600! bg-zinc-950 md:border-x">
+        <div className="relative z-10 mx-auto flex h-full max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-zinc-950 md:border-x">
           {children}
         </div>
         <ScrollRestoration />
