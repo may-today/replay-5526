@@ -5,7 +5,7 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-background;
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
@@ -15,41 +15,6 @@ body {
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.6 0.1 185);
-  --primary-foreground: oklch(0.98 0.01 181);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.85 0.13 181);
-  --chart-2: oklch(0.78 0.13 182);
-  --chart-3: oklch(0.7 0.12 183);
-  --chart-4: oklch(0.6 0.1 185);
-  --chart-5: oklch(0.51 0.09 186);
-  --radius: 0;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.6 0.1 185);
-  --sidebar-primary-foreground: oklch(0.98 0.01 181);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -134,5 +99,94 @@ body {
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer base {
+  :root {
+    /* Gradients */
+    --gradient-vinyl: radial-gradient(
+      ellipse at 30% 30%,
+      hsl(0 0% 20%) 0%,
+      hsl(0 0% 8%) 40%,
+      hsl(0 0% 5%) 100%
+    );
+    --gradient-label: linear-gradient(
+      135deg,
+      hsl(38 70% 55%) 0%,
+      hsl(38 60% 40%) 50%,
+      hsl(25 50% 30%) 100%
+    );
+    --gradient-wood: linear-gradient(
+      180deg,
+      hsl(25 30% 14%) 0%,
+      hsl(25 25% 10%) 100%
+    );
+  }
+}
+
+@layer components {
+  .vinyl-record {
+    background: var(--gradient-vinyl);
+    box-shadow: var(--shadow-vinyl);
+  }
+
+  .vinyl-grooves {
+    background: var(--gradient-grooves);
+  }
+
+  .vinyl-label {
+    background: var(--gradient-label);
+  }
+
+  .wood-surface {
+    background: var(--gradient-wood);
+  }
+}
+
+@layer utilities {
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 24s linear infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .text-shadow-gold {
+    text-shadow: 0 2px 10px hsla(38, 70%, 50%, 0.5);
   }
 }
