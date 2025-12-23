@@ -21,7 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <div className="mx-auto flex h-dvh max-w-3xl flex-col overflow-hidden md:border-r-2 md:border-l-2">
+        <div className="mx-auto flex h-dvh max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-zinc-950 md:border-x">
           {children}
         </div>
         <ScrollRestoration />
