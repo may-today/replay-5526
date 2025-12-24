@@ -1,3 +1,4 @@
+import BaseInformationForm from './BaseInformationForm'
 import Vinyl from './Vinyl'
 
 export const meta = () => {
@@ -6,24 +7,7 @@ export const meta = () => {
 
 export default function IndexPage() {
   return (
-    <div className="min-h-screen overflow-hidden">
-      {/* Wood texture background */}
-      <div
-        className="wood-surface absolute inset-0 opacity-50"
-        style={{
-          backgroundImage: `
-            linear-gradient(180deg, hsl(25 30% 14%) 0%, hsl(25 25% 10%) 100%),
-            repeating-linear-gradient(
-              90deg,
-              transparent,
-              transparent 100px,
-              rgba(0,0,0,0.03) 100px,
-              rgba(0,0,0,0.03) 200px
-            )
-          `,
-        }}
-      />
-
+    <div className="flex min-h-screen flex-col items-center justify-stretch overflow-hidden">
       {/* Ambient light effect */}
       <div className="pointer-events-none fixed inset-0">
         <div
@@ -34,17 +18,59 @@ export default function IndexPage() {
         />
       </div>
 
-      <header className="flex flex-col items-center justify-start">
-        <div className="absolute top-[280px] -translate-y-full">
-          <Vinyl subTitle="● MAYDAY ●" title="REPLAY 5525+1" />
-        </div>
-      </header>
-
       {/* Main content */}
-      <main className="relative z-10 flex min-h-screen flex-col items-center justify-start px-4 py-12 md:py-20">
-        {/* Vinyl Record */}
-        <div className="relative mb-12 md:mb-16" />
+      <main className="relative flex w-full flex-1 flex-col justify-start px-8 py-12 md:py-20">
+        <BaseInformationForm />
+        {/* <div className="w-full max-w-sm space-y-6">
+          <div className="mb-8 text-center">
+            <h1 className="mb-2 font-bold font-display text-2xl text-foreground text-shadow-gold md:text-3xl">
+              开始你的旅程
+            </h1>
+            <p className="font-body text-muted-foreground">输入你的信息</p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="font-body text-muted-foreground text-sm">你的名字</label>
+              <Input
+                className="h-12 border-border/50 bg-secondary/50 text-foreground placeholder:text-muted-foreground/50 focus:border-primary"
+                onChange={(e) => setName(e.target.value)}
+                placeholder="请输入名字"
+                type="text"
+                value={name}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="font-body text-muted-foreground text-sm">你的城市</label>
+              <Input
+                className="h-12 border-border/50 bg-secondary/50 text-foreground placeholder:text-muted-foreground/50 focus:border-primary"
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="请输入城市"
+                type="text"
+                value={city}
+              />
+            </div>
+          </div>
+
+          <Button
+            className="group mt-8 h-12 w-full font-body text-base"
+            disabled={!(name.trim() && city.trim())}
+            onClick={handleContinue}
+            style={{
+              boxShadow: '0 10px 30px -10px hsla(38, 70%, 50%, 0.4)',
+            }}
+          >
+            继续
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </div> */}
       </main>
+
+      {/* Footer */}
+      <div className="-mb-[320px]">
+        <Vinyl subTitle="● MAYDAY ●" title="REPLAY 5525+1" />
+      </div>
     </div>
   )
 }
