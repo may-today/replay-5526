@@ -1,4 +1,5 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { TextureOverlay } from '~/components/ui/texture-overlay'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -21,16 +22,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="relative h-dvh">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(75, 85, 99, 0.4) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(75, 85, 99, 0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px',
-          }}
-        />
+        <div className="absolute inset-0 z-0 rounded-lg bg-linear-to-br from-neutral-800 to-neutral-900">
+          <TextureOverlay className="mix-blend-overlay" texture="dots" />
+        </div>
         <div className="relative z-10 mx-auto flex h-full max-w-3xl flex-col overflow-hidden border-zinc-800 border-x bg-zinc-950 md:border-x">
           {children}
         </div>
