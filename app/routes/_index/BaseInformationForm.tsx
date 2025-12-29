@@ -1,10 +1,12 @@
 import { useAtom } from 'jotai'
+import { ArrowRight } from 'lucide-react'
+import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectSeparator, SelectTrigger, SelectValue } from '~/components/ui/select'
 import { geoCoordMap } from '~/data/geoCoord'
 import { selectedProvinceAtom, usernameAtom } from '~/stores/app'
 
-const BaseInformationForm = () => {
+const BaseInformationForm: React.FC<{ onContinue: () => void }> = ({ onContinue }) => {
   const [username, setUsername] = useAtom(usernameAtom)
   const [selectedProvince, setSelectedProvince] = useAtom(selectedProvinceAtom)
 
@@ -39,6 +41,17 @@ const BaseInformationForm = () => {
           </SelectContent>
         </Select>
       </div>
+      <Button
+        className="group mt-8 h-12 w-full font-body text-base"
+        disabled={!(username.trim() && selectedProvince.trim())}
+        onClick={onContinue}
+        style={{
+          boxShadow: '0 10px 30px -10px hsla(38, 70%, 50%, 0.4)',
+        }}
+      >
+        继续
+        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+      </Button>
     </div>
   )
 }

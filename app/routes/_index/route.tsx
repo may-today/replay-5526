@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import BaseInformationForm from './BaseInformationForm'
+import ConcertSelectForm from './ConcertSelectForm'
 import Vinyl from './Vinyl'
 
 export const meta = () => {
@@ -6,6 +8,8 @@ export const meta = () => {
 }
 
 export default function IndexPage() {
+  const [currentStep, setCurrentStep] = useState<'base' | 'concert'>('base')
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-stretch overflow-hidden">
       {/* Ambient light effect */}
@@ -19,8 +23,9 @@ export default function IndexPage() {
       </div>
 
       {/* Main content */}
-      <main className="relative flex w-full flex-1 flex-col justify-start px-8 py-12 md:py-20">
-        <BaseInformationForm />
+      <main className="relative flex w-full flex-1 flex-col justify-start overflow-hidden px-8 py-12 md:py-20">
+        {currentStep === 'base' && <BaseInformationForm onContinue={() => setCurrentStep('concert')} />}
+        {currentStep === 'concert' && <ConcertSelectForm />}
         {/* <div className="w-full max-w-sm space-y-6">
           <div className="mb-8 text-center">
             <h1 className="mb-2 font-bold font-display text-2xl text-foreground text-shadow-gold md:text-3xl">
