@@ -1,0 +1,21 @@
+@keyframes cinematic-pan {
+  0% {
+    transform: scale(1.15) translateX(-6%);
+  }
+  100% {
+    transform: scale(1.15) translateX(6%);
+  }
+}
+
+.animate-pan {
+  animation: cinematic-pan 12s linear infinite alternate;
+  will-change: transform;
+}
+
+.base-zoom {
+  transform: scale(1.15) translateX(-6%);
+}
+
+.fade-transition {
+  transition: opacity 2000ms cubic-bezier(0.4, 0, 0.2, 1);
+}
