@@ -9,6 +9,7 @@ export const ballColorMap = {
   sky: '#bae6fd',
   blue: '#2563eb',
   purple: '#6d28d9',
+  grass: '#65a30d',
 }
 
 // used for gradient background
@@ -23,4 +24,5 @@ export const ballColorMapLight = {
   sky: '#bae6fd',
   blue: '#60a5fa',
   purple: '#8b5cf6',
+  grass: '#84cc16',
 }
