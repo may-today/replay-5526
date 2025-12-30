@@ -75,29 +75,6 @@ const Vinyl = ({ title = 'TITLE', subTitle = '● STEREO ●' }: VinylRecordProp
           <g className="opacity-60">{createTextPath(subTitle, 220, 120)}</g>
         </svg>
 
-        {/* Center label */}
-        <div
-          className="vinyl-label absolute top-1/2 left-1/2 flex h-[35%] w-[35%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full"
-          style={{
-            boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.5), 0 2px 5px rgba(0,0,0,0.3)',
-          }}
-        >
-          {/* Label inner ring */}
-          <div className="absolute inset-2 rounded-full border border-primary-foreground/20" />
-
-          {/* Label content */}
-          <div className="relative z-10 text-center">
-            <div className="mb-1 font-display text-primary-foreground/90 text-sm tracking-widest md:text-base">
-              GOLDEN
-            </div>
-            <div className="font-bold font-display text-lg text-primary-foreground tracking-wider md:text-xl">
-              RECORDS
-            </div>
-            <div className="mx-auto my-2 h-px w-8 bg-primary-foreground/40" />
-            <div className="font-body text-primary-foreground/70 text-xs tracking-widest">33⅓ RPM</div>
-          </div>
-        </div>
-
         {/* Reflection overlay */}
         <div
           className="pointer-events-none absolute inset-0 rounded-full"

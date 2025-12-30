@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router'
 import logo from '~/assets/logo.svg'
+import GridBackground from '~/components/GridBackground'
 import NoiseBackground from '~/components/NoiseBackground'
 import BackgroundSlider from './BackgroundSlider'
 import NextButton from './NextButton'
@@ -15,14 +16,14 @@ export default function FormPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-stretch overflow-hidden">
+    <div className="flex h-full flex-col items-center justify-stretch overflow-hidden">
       {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 z-0">
         <BackgroundSlider
           className="mask-t-from-60% mask-t-to-80% mask-b-from-20%"
           images={bgImageNameList.map((name) => `https://wx-static.ddiu.site/cover/album/thumb/${name}.webp`)}
         />
-        <div className="mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(to_right,#4f4f4f6e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f6e_1px,transparent_1px)] bg-size-[35px_34px]" />
+        <GridBackground />
         <ShaderBackground />
         <NoiseBackground />
       </div>

@@ -22,7 +22,7 @@ body {
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.7 0.12 183);
+  --primary: oklch(0.7 0.12 243);
   --primary-foreground: oklch(0.28 0.04 193);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
@@ -34,19 +34,20 @@ body {
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.85 0.13 181);
-  --chart-2: oklch(0.78 0.13 182);
-  --chart-3: oklch(0.7 0.12 183);
-  --chart-4: oklch(0.6 0.1 185);
-  --chart-5: oklch(0.51 0.09 186);
+  --chart-1: oklch(0.85 0.13 243);
+  --chart-2: oklch(0.78 0.13 243);
+  --chart-3: oklch(0.7 0.12 243);
+  --chart-4: oklch(0.6 0.1 243);
+  --chart-5: oklch(0.51 0.09 243);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.78 0.13 182);
+  --sidebar-primary: oklch(0.78 0.13 243);
   --sidebar-primary-foreground: oklch(0.28 0.04 193);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -101,6 +102,30 @@ body {
   html {
     @apply font-sans;
   }
+
+  @keyframes show-top-mask {
+    to {
+      --top-mask-height: var(--mask-height);
+    }
+  }
+
+  @keyframes hide-bottom-mask {
+    to {
+      --bottom-mask-height: 0px;
+    }
+  }
+
+  @keyframes show-left-mask {
+    to {
+      --left-mask-width: var(--mask-width);
+    }
+  }
+
+  @keyframes hide-right-mask {
+    to {
+      --right-mask-width: 0px;
+    }
+  }
 }
 
 @layer base {
@@ -111,12 +136,6 @@ body {
       hsl(0 0% 20%) 0%,
       hsl(0 0% 8%) 40%,
       hsl(0 0% 5%) 100%
-    );
-    --gradient-label: linear-gradient(
-      135deg,
-      hsl(38 70% 55%) 0%,
-      hsl(38 60% 40%) 50%,
-      hsl(25 50% 30%) 100%
     );
   }
 }
@@ -129,10 +148,6 @@ body {
 
   .vinyl-grooves {
     background: var(--gradient-grooves);
-  }
-
-  .vinyl-label {
-    background: var(--gradient-label);
   }
 }
 
@@ -149,4 +164,82 @@ body {
   .animate-spin-slow {
     animation: spin-slow 24s linear infinite;
   }
+}
+
+@property --top-mask-height {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --bottom-mask-height {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 64px;
+}
+
+@property --left-mask-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --right-mask-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 64px;
+}
+
+@utility scroll-fade-effect-y {
+  --mask-height: 64px;
+  --mask-offset-top: 0px;
+  --mask-offset-bottom: 0px;
+  --scroll-buffer: 2rem;
+  mask-image:
+    linear-gradient(to top, transparent, black 90%),
+    linear-gradient(to bottom, transparent 0%, black 100%),
+    linear-gradient(black, black);
+  mask-size:
+    100% var(--top-mask-height),
+    100% var(--bottom-mask-height),
+    100% 100%;
+  mask-repeat: no-repeat, no-repeat, no-repeat;
+  mask-position:
+    0 var(--mask-offset-top),
+    0 calc(100% - var(--mask-offset-bottom)),
+    0 0;
+  mask-composite: exclude;
+  animation-name: show-top-mask, hide-bottom-mask;
+  animation-timeline: scroll(self), scroll(self);
+  animation-range:
+    0 var(--scroll-buffer),
+    calc(100% - var(--scroll-buffer)) 100%;
+  animation-fill-mode: both;
+}
+
+@utility scroll-fade-effect-x {
+  --mask-width: 64px;
+  --mask-offset-left: 0px;
+  --mask-offset-right: 0px;
+  --scroll-buffer: 2rem;
+  mask-image:
+    linear-gradient(to left, transparent, black 90%),
+    linear-gradient(to right, transparent 0%, black 100%),
+    linear-gradient(black, black);
+  mask-size:
+    var(--left-mask-width) 100%,
+    var(--right-mask-width) 100%,
+    100% 100%;
+  mask-repeat: no-repeat, no-repeat, no-repeat;
+  mask-position:
+    var(--mask-offset-left) 0,
+    calc(100% - var(--mask-offset-right)) 0,
+    0 0;
+  mask-composite: exclude;
+  animation-name: show-left-mask, hide-right-mask;
+  animation-timeline: scroll(self inline), scroll(self inline);
+  animation-range:
+    0 var(--scroll-buffer),
+    calc(100% - var(--scroll-buffer)) 100%;
+  animation-fill-mode: both;
 }
