@@ -24,7 +24,7 @@ const ConcertSelectForm = () => {
   return (
     <div className="flex h-full flex-col gap-6">
       <ScrollFadeEffect className="flex-1 space-y-8 px-8 py-12">
-        <h2>选择你去过的场次和座位：</h2>
+        <h2>选择去过的场次和座位：</h2>
         {Object.entries(cityConcertGroupList).map(([city, concerts]) => (
           <div className="space-y-4" key={city}>
             <h2 className="font-bold text-lg">{city}</h2>
@@ -41,8 +41,8 @@ const ConcertSelectForm = () => {
           </div>
         ))}
       </ScrollFadeEffect>
-      {/* <div className="flex-1 space-y-8 overflow-y-auto">
-      </div> */}
+      {Object.keys(selectedConcertDateTypeMap).length > 0 && (
+
       <div className="px-8 pb-12">
         <SlideToUnlock
           className="w-full bg-transparent! ring-0"
@@ -60,6 +60,7 @@ const ConcertSelectForm = () => {
         </SlideToUnlock>
         {/* <Button className="group h-12 w-full font-body text-base">继续</Button> */}
       </div>
+      )}
     </div>
   )
 }
