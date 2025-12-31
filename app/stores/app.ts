@@ -11,7 +11,10 @@ export const selectedCoordAtom = atom<[number, number] | null>((get) => {
   const province = get(selectedProvinceAtom)
   return geoCoordMap[province] || null
 })
-export const selectedConcertDateTypeMapAtom = atomWithStorage<Record<string, ConcertSelectType>>('replay:selectedConcertDateTypeMap', {})
+export const selectedConcertDateTypeMapAtom = atomWithStorage<Record<string, ConcertSelectType>>(
+  'replay:selectedConcertDateTypeMap',
+  {}
+)
 export const selectedConcertDetailsAtom = atom<Concert[]>((get) => {
   return Array.from(Object.keys(get(selectedConcertDateTypeMapAtom))).map((date) => concertListMap[date])
 })

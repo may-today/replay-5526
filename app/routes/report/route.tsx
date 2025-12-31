@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import NoiseBackground from '~/components/NoiseBackground'
-import { selectedConcertDateTypeMapAtom } from '~/stores/app'
+import { selectedConcertDateTypeMapAtom, usernameAtom } from '~/stores/app'
 import Report from './Report'
 
 export const meta = () => {
@@ -12,6 +12,7 @@ export const meta = () => {
 export default function ReportPage() {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const selectedConcertDates = Object.keys(selectedConcertDateTypeMap)
+  const username = useAtomValue(usernameAtom)
   const navigate = useNavigate()
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -32,7 +33,7 @@ export default function ReportPage() {
       </div>
 
       {/* Main */}
-      <Report />
+      <Report username={username} />
     </div>
   )
 }

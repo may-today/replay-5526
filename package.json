@@ -32,6 +32,7 @@
     "react-freeze": "^1.0.4",
     "react-router": "7.10.1",
     "react-use-measure": "^2.1.7",
+    "recharts": "2.15.4",
     "shadcn": "^3.6.2",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0",

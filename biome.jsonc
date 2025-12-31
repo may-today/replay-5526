@@ -4,6 +4,13 @@
   "formatter": {
     "lineWidth": 120
   },
+  "linter": {
+    "rules": {
+      "style": {
+        "noEnum": "off"
+      }
+    }
+  },
   "javascript": {
     "formatter": {
       "quoteStyle": "single",

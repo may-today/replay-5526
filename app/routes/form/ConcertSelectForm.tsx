@@ -14,6 +14,7 @@ import {
 } from '~/components/ui/slide-to-unlock'
 import type { Concert, ConcertSelectType } from '~/data/types'
 import { cityConcertGroupList } from '~/lib/data'
+import { formatConcertTitle } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom, setSelectedConcertDateAtom } from '~/stores/app'
 
 const ConcertSelectForm = () => {
@@ -42,24 +43,23 @@ const ConcertSelectForm = () => {
         ))}
       </ScrollFadeEffect>
       {Object.keys(selectedConcertDateTypeMap).length > 0 && (
-
-      <div className="px-8 pb-12">
-        <SlideToUnlock
-          className="w-full bg-transparent! ring-0"
-          handleWidth={80}
-          onUnlock={() => navigate('/loading', { replace: true, viewTransition: true })}
-        >
-          <SlideToUnlockTrack className="h-5 rounded-full bg-white/10 backdrop-blur-md">
-            <SlideToUnlockText>
-              <span className="animate-pulse text-muted-foreground text-xs">滑动解锁你的年度报告</span>
-            </SlideToUnlockText>
-            <SlideToUnlockHandle className="-top-3 bg-transparent!">
-              <img alt="plane" className="size-20" draggable={false} height={80} src={PlaneImg} width={80} />
-            </SlideToUnlockHandle>
-          </SlideToUnlockTrack>
-        </SlideToUnlock>
-        {/* <Button className="group h-12 w-full font-body text-base">继续</Button> */}
-      </div>
+        <div className="px-8 pb-12">
+          <SlideToUnlock
+            className="w-full bg-transparent! ring-0"
+            handleWidth={80}
+            onUnlock={() => navigate('/loading', { replace: true, viewTransition: true })}
+          >
+            <SlideToUnlockTrack className="h-5 rounded-full bg-white/10 backdrop-blur-md">
+              <SlideToUnlockText>
+                <span className="animate-pulse text-muted-foreground text-xs">滑动解锁你的年度报告</span>
+              </SlideToUnlockText>
+              <SlideToUnlockHandle className="-top-3 bg-transparent!">
+                <img alt="plane" className="size-20" draggable={false} height={80} src={PlaneImg} width={80} />
+              </SlideToUnlockHandle>
+            </SlideToUnlockTrack>
+          </SlideToUnlock>
+          {/* <Button className="group h-12 w-full font-body text-base">继续</Button> */}
+        </div>
       )}
     </div>
   )
@@ -108,7 +108,7 @@ const ConcertSelectItem: React.FC<{
       </PopoverTrigger>
       <PopoverContent className="gap-0 border-2 bg-gray-600/80 p-0 backdrop-blur-md" hideWhenDetached>
         <div className="flex border-b-2 p-2 text-muted-foreground text-xs">
-          {concert.city}D{concert.cityIndex} {concert.date.replace(/20\d{2}\./, '')}
+          {formatConcertTitle(concert)} {concert.date.replace(/20\d{2}\./, '')}
         </div>
         <PopoverPrimitive.Close asChild>
           <div className="flex border-b-2">

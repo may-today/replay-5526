@@ -164,6 +164,90 @@ body {
   .animate-spin-slow {
     animation: spin-slow 24s linear infinite;
   }
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    2% {
+      opacity: 0.8;
+      filter: brightness(0.9);
+    }
+    4% {
+      opacity: 1;
+      filter: brightness(1.1);
+    }
+    6% {
+      opacity: 0.9;
+      filter: brightness(0.95);
+    }
+    8% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    10% {
+      opacity: 0.7;
+      filter: brightness(0.8);
+    }
+    12% {
+      opacity: 1;
+      filter: brightness(1.05);
+    }
+    14% {
+      opacity: 0.85;
+      filter: brightness(0.9);
+    }
+    16% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    20% {
+      opacity: 0.95;
+      filter: brightness(0.98);
+    }
+    22% {
+      opacity: 1;
+      filter: brightness(1.02);
+    }
+    30% {
+      opacity: 0.9;
+      filter: brightness(0.95);
+    }
+    32% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.88;
+      filter: brightness(0.92);
+    }
+    52% {
+      opacity: 1;
+      filter: brightness(1.03);
+    }
+    70% {
+      opacity: 0.92;
+      filter: brightness(0.96);
+    }
+    72% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    90% {
+      opacity: 0.85;
+      filter: brightness(0.9);
+    }
+    92% {
+      opacity: 1;
+      filter: brightness(1.05);
+    }
+  }
+
+  .animate-flicker {
+    animation: flicker 3s ease-in-out infinite;
+  }
 }
 
 @property --top-mask-height {
@@ -250,5 +334,17 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .text-report-sm {
+    @apply text-base font-semibold my-2 leading-normal;
+  }
+  .text-report-base {
+    @apply text-lg font-semibold my-2 leading-normal;
+  }
+  .text-report-lg {
+    @apply text-3xl font-bold mx-1 first:ml-0;
   }
 }

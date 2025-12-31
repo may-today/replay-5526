@@ -1,13 +1,31 @@
 export interface Concert {
+  /** 日期 */
   date: string
+  /** 城市 */
   city: string
+  /** 场次 */
   cityIndex: number
+  /** 是否尾场 */
   last?: boolean
+  /** 类型（5525+1） */
+  type?: '5526'
+  /** 嘉宾 */
   guest: string
+  /** 开始时间（hhmm） */
+  start?: number
+  /** 结束时间（hhmm） */
+  end?: number
+  /** 点歌列表 */
   requestSongList: string[]
+  /** 嘉宾歌曲列表 */
   guestSongList: string[]
-  endingSong: string
+  /** 非五月天歌曲列表 */
+  specialSongList: string[]
+  /** 安可歌曲列表 */
   encoreSongList: string[]
+  /** 结尾歌曲 */
+  endingSong: string
+  /** 大球颜色列表 */
   ballColorList: string[]
 }
 
