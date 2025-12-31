@@ -1,7 +1,13 @@
+import { useAtomValue } from 'jotai'
 import { Activity, useEffect, useState } from 'react'
 // import AllListenedSongsStat from '~/components/reports/AllListenedSongsStat'
 import AttendedStat from '~/components/reports/AttendedStat'
 import AttendedStat2 from '~/components/reports/AttendedStat2'
+import CityStat from '~/components/reports/CityStat'
+// import EncoreSongStat from '~/components/reports/EncoreSongStat'
+import GuestStat from '~/components/reports/GuestStat'
+import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
+import RandomSongStat from '~/components/reports/RandomSongStat'
 import {
   Carousel,
   type CarouselApi,
@@ -10,11 +16,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '~/components/ui/carousel'
+import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
 
-// import CityStat from '~/components/reports/CityStat'
-// import EncoreSongStat from '~/components/reports/EncoreSongStat'
-// import GuestStat from '~/components/reports/GuestStat'
-// import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
 // import RequestSongsStat from '~/components/reports/RequestSongsStat'
 // import SpecialEventStat, { shouldShowSpecialEventStat } from '~/components/reports/SpecialEventStat'
 // import TalkingStat, { shouldShowTalkingStat } from '~/components/reports/TalkingStat'
@@ -23,6 +26,9 @@ import {
 const Report: React.FC<{ username: string }> = ({ username }) => {
   const [api, setApi] = useState<CarouselApi>()
   const [currentIndex, setCurrentIndex] = useState(0)
+  // 选择场次的数据，用于过滤不展示的报表页
+  const selectedConcertDetails = useAtomValue(selectedConcertDetailsAtom)
+  const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
 
   useEffect(() => {
     if (!api) {
@@ -41,11 +47,17 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     AttendedStat,
     // 场次概览2
     AttendedStat2,
+    // 城市概览
+    CityStat,
+    // 下雨统计
+    RainStat: shouldShowRainStat(selectedConcertDetails, selectedConcertDateTypeMap) ? RainStat : null,
+    // 嘉宾统计
+    GuestStat,
+    // 随机歌曲统计
+    RandomSongStat,
+
     // 歌曲概览
     // AllListenedSongsStat,
-    // CityStat,
-    // RainStat: shouldShowRainStat(selectedConcertDetails, selectedConcertDateTypeMap) ? RainStat : null,
-    // GuestStat,
     // RequestSongsStat,
     // EncoreSongStat,
     // SpecialEventStat: shouldShowSpecialEventStat(selectedConcertDetails) ? SpecialEventStat : null,
@@ -59,11 +71,11 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
         <CarouselContent className="h-full">
           {Object.entries(slides)
             .filter(([_, Slide]) => !!Slide)
-            .map(([key, Slide], index) => (
+            .map(([key, SlideComponent], index) => (
               <CarouselItem className="h-full select-none border-[0.5px] border-x" key={key}>
                 {/* 当前页、前一页保持活跃状态 */}
                 <Activity mode={index + 1 === currentIndex || index + 1 === currentIndex - 1 ? 'visible' : 'hidden'}>
-                  <Slide focus />
+                  <SlideComponent focus />
                 </Activity>
               </CarouselItem>
             ))}

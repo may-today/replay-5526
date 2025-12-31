@@ -28,7 +28,7 @@ const ConcertSelectForm = () => {
         <h2>选择去过的场次和座位：</h2>
         {Object.entries(cityConcertGroupList).map(([city, concerts]) => (
           <div className="space-y-4" key={city}>
-            <h2 className="font-bold text-lg">{city}</h2>
+            <h2 className="font-bold text-lg">{city.split('-')[0]}</h2>
             <div className="grid grid-cols-2 gap-4">
               {concerts.map((concert) => (
                 <ConcertSelectItem

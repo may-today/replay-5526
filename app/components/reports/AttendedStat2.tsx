@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai'
-import { motion, stagger } from 'motion/react'
+import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { ConcertSelectType } from '~/data/types'
@@ -7,6 +7,7 @@ import { concertListMap } from '~/lib/data'
 import { convertHHmmToMinutes, convertHHmmToString, getConcertTitleByDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { BarList } from '../BarList'
+import { groupVariants, itemVariants } from './animated'
 
 const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
@@ -51,27 +52,6 @@ const AttendedStat2: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
 
-  const groupVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: stagger(1),
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-    },
-  }
-
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="flex-1 space-y-4 p-6">
@@ -97,8 +77,6 @@ const AttendedStat2: React.FC = () => {
     </div>
   )
 }
-
-export const description = 'A bar chart with a custom label'
 
 const Chart: React.FC<{ data: { name: string; value: number }[] }> = ({ data }) => {
   return <BarList className="mt-6" data={data} sortOrder="none" valueFormatter={(value) => `${value} 分钟`} />

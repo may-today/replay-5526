@@ -15,6 +15,8 @@ export interface Concert {
   start?: number
   /** 结束时间（hhmm） */
   end?: number
+  /** 歌曲数量 */
+  songAmount: number
   /** 点歌列表 */
   requestSongList: string[]
   /** 嘉宾歌曲列表 */

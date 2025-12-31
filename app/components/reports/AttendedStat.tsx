@@ -1,11 +1,12 @@
 import { useAtomValue } from 'jotai'
-import { motion, stagger } from 'motion/react'
+import { motion } from 'motion/react'
 import { memo, useMemo, useState } from 'react'
 import type { ConcertSelectType } from '~/data/types'
 import { cityConcertGroupList, concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { DayHighlightType } from '../MonthGrid'
 import YearGrid, { type HighlightDateDict } from '../YearGrid'
+import { groupVariants, itemVariants } from './animated'
 
 const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
   const allDates = Object.keys(concertListMap)
@@ -32,27 +33,6 @@ const AttendedStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
 
-  const groupVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: stagger(1),
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-    },
-  }
-
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="flex-1 space-y-4 p-6">
@@ -74,7 +54,7 @@ const AttendedStat: React.FC = () => {
               setCurrentDataFilter(DayHighlightType.HIGH)
             }}
             variants={itemVariants}
-          >{`我参与了 ${data.selectedDates.length.toString()} 场${data.lastConcertAmount > 0 ? `，并有幸 ${data.lastConcertAmount.toString()} 次见证尾场` : ''}`}</motion.p>
+          >{`你参与了 ${data.selectedDates.length.toString()} 场${data.lastConcertAmount > 0 ? `，并有幸 ${data.lastConcertAmount.toString()} 次见证尾场` : ''}`}</motion.p>
         </motion.div>
         <YearGrid className="mt-6" filter={currentDataFilter} highlightDates={data.highlightDateDict} year={2025} />
       </div>

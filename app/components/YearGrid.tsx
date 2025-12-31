@@ -12,7 +12,7 @@ const YearGrid: React.FC<{
   const yearData = getYearData(year, highlightDates)
 
   return (
-    <main className={clsx('grid w-full max-w-4xl grid-cols-3 gap-3', className)}>
+    <main className={clsx('grid w-full max-w-4xl grid-cols-3 gap-3 md:grid-cols-4', className)}>
       {yearData.map((month, idx) => {
         const firstDay = new Date(year, idx, 1).getDay()
         return (
