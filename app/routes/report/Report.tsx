@@ -8,6 +8,8 @@ import CityStat from '~/components/reports/CityStat'
 import GuestStat from '~/components/reports/GuestStat'
 import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
 import RandomSongStat from '~/components/reports/RandomSongStat'
+import RandomSongStat2 from '~/components/reports/RandomSongStat2'
+import SpecialSongStat from '~/components/reports/SpecialSongStat'
 import {
   Carousel,
   type CarouselApi,
@@ -55,6 +57,17 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     GuestStat,
     // 随机歌曲统计
     RandomSongStat,
+    // 随机曲目统计（你的唯一）
+    RandomSongStat2,
+    // 随机曲目统计（四宫格）
+    // 特殊歌曲统计
+    SpecialSongStat,
+    // 结尾歌曲统计
+    // 大球颜色统计
+    // 专属回忆
+    // Talking 统计
+    // 年度关键词
+    // 小票打印机
 
     // 歌曲概览
     // AllListenedSongsStat,
@@ -80,7 +93,7 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
               </CarouselItem>
             ))}
         </CarouselContent>
-        <footer className="flex h-16 shrink-0 items-center gap-2 border-t px-6">
+        <footer className="flex h-16 shrink-0 select-none items-center gap-2 border-t px-6">
           <div className="flex-1 text-muted-foreground/50 text-xs">
             <p>{username ? `${username} 的` : '我的'} 5525+1 年度报告</p>
             <p className="opacity-50">replay.mayday.land</p>

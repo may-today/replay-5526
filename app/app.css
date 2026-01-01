@@ -339,10 +339,10 @@ body {
 
 @layer components {
   .text-report-sm {
-    @apply text-base font-semibold leading-normal;
+    @apply text-base font-semibold mx-1 leading-normal;
   }
   .text-report-base {
-    @apply text-lg font-semibold my-2 mx-1 leading-normal;
+    @apply text-lg font-semibold mx-1 leading-relaxed;
   }
   .text-report-lg {
     @apply text-3xl font-bold mx-1 first:ml-0;

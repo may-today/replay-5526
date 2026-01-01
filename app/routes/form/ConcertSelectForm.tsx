@@ -14,7 +14,7 @@ import {
 } from '~/components/ui/slide-to-unlock'
 import type { Concert, ConcertSelectType } from '~/data/types'
 import { cityConcertGroupList } from '~/lib/data'
-import { formatConcertTitle } from '~/lib/format'
+import { formatConcertTitle, removeYearFromDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom, setSelectedConcertDateAtom } from '~/stores/app'
 
 const ConcertSelectForm = () => {
@@ -95,7 +95,7 @@ const ConcertSelectItem: React.FC<{
           ])}
         >
           <span>
-            D{concert.cityIndex}# {concert.date.replace(/20\d{2}\./, '')}
+            D{concert.cityIndex}# {removeYearFromDate(concert.date)}
           </span>
           {selected && (
             <span
@@ -108,7 +108,7 @@ const ConcertSelectItem: React.FC<{
       </PopoverTrigger>
       <PopoverContent className="gap-0 border-2 bg-gray-600/80 p-0 backdrop-blur-md" hideWhenDetached>
         <div className="flex border-b-2 p-2 text-muted-foreground text-xs">
-          {formatConcertTitle(concert)} {concert.date.replace(/20\d{2}\./, '')}
+          {formatConcertTitle(concert)} {removeYearFromDate(concert.date)}
         </div>
         <PopoverPrimitive.Close asChild>
           <div className="flex border-b-2">

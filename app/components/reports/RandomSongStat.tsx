@@ -14,11 +14,9 @@ const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectTyp
   const randomSongListDict: Record<string, string[]> = Object.values(concertListMap).reduce(
     (acc, concert) => {
       // 嘉宾曲目（需要和 specialSongList 做交集，因为嘉宾会唱五月天的歌）
-      const guestSpecialSongList = concert.guestSongList.filter((song) => concert.specialSongList.includes(song))
+      // const guestSpecialSongList = concert.guestSongList.filter((song) => concert.specialSongList.includes(song))
       // 和点歌、安可合并后去重
-      const songList = Array.from(
-        new Set([...concert.requestSongList, ...concert.encoreSongList, ...guestSpecialSongList])
-      )
+      const songList = Array.from(new Set([...concert.requestSongList, ...concert.encoreSongList]))
       acc[concert.date] = songList
       return acc
     },
@@ -47,8 +45,9 @@ const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectTyp
    * 5525/5526 公共固定歌曲 开场部分 5 + 点歌前部分 3 + 点歌后部分 10
    * 5525 固定歌曲 19
    * 5526 固定歌曲 17
+   * 嘉宾歌曲 26
    */
-  const totalSongAmount = 54 + totalRandomSongAmount
+  const totalSongAmount = 54 + 26 + totalRandomSongAmount
 
   /** 个人选择的场次 */
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
@@ -96,22 +95,22 @@ const RandomSongStat: React.FC = () => {
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="flex-1 space-y-4 p-6">
-        <div className="text-right">
-          <div className="text-report-base opacity-50">这一年</div>
-          <div className="text-report-base opacity-50">
+        <div className="text-right opacity-50">
+          <div className="text-report-base">这一年</div>
+          <div className="text-report-base">
             <span>共演唱了 </span>
             <NumberTicker value={data.totalSongTime} />
             <span> 次，</span>
             <NumberTicker value={data.totalSongAmount} />
             <span> 首歌曲</span>
           </div>
-          <div className="text-report-base opacity-50">
+          <div className="text-report-base">
             <span>其中 </span>
             <NumberTicker value={data.totalRandomSongAmount} />
-            <span> 首是随机曲目</span>
+            <span> 首是那些不期而遇</span>
           </div>
+          <div className="text-report-base">来自于点歌、安可的随机曲目</div>
         </div>
-        {/* <TextAnimate animation="blurInUp" by="line" className="text-report-base" duration={1} once></TextAnimate> */}
         <motion.div animate="visible" initial="hidden" variants={groupVariants}>
           <motion.p className="text-report-base" variants={itemVariants}>
             你听过 <NumberTicker className="text-report-lg" value={data.selectedRandomSongAmount} /> 首随机曲目

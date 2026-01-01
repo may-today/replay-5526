@@ -62,9 +62,12 @@ const AttendedStat2: React.FC = () => {
             <br />
             看见满场空座椅 灯亮起
           </motion.p>
-          <motion.p className="text-report-base" variants={itemVariants}>
-            这一年的时间坐标里，你和五月天占据了 <NumberTicker value={data.totalMinutes} /> 分钟
-          </motion.p>
+          <motion.div className="text-report-base" variants={itemVariants}>
+            <p>这一年的时间坐标里，你和五月天占据了</p>
+            <p>
+              <NumberTicker value={data.totalMinutes} /> 分钟
+            </p>
+          </motion.div>
           <motion.p className="text-report-base" variants={itemVariants}>
             <span className="text-report-lg">{data.mostLateEndingNameList.join('、')}</span> 是夜色最深的一次
           </motion.p>

@@ -134,7 +134,7 @@
   {
     "date": "2025.01.11",
     "city": "新加坡",
-    "last": true,
+    "cityIndex": 1,
     "guest": "",
     "start": 1920,
     "end": 2242,
@@ -157,7 +157,7 @@
     "songAmount": 47,
     "requestSongList": ["勇敢", "牙關", "第二人生", "鳳陽花鼓", "快樂很偉大"],
     "guestSongList": ["天黑黑", "溫柔", "逆光"],
-    "specialSongList": ["鳳陽花鼓", "二次西遊", "星期五晚上"],
+    "specialSongList": ["鳳陽花鼓", "天黑黑", "逆光"],
     "encoreSongList": ["玫瑰少年", "洋蔥"],
     "endingSong": "洋蔥",
     "ballColorList": ["white"]
@@ -607,7 +607,7 @@
     "songAmount": 46,
     "requestSongList": ["2012", "忘詞", "雨眠", "闖"],
     "guestSongList": ["志明與春嬌", "如果可以"],
-    "specialSongList": ["志明與春嬌", "如果可以"],
+    "specialSongList": ["如果可以"],
     "encoreSongList": [
       "雌雄同體",
       "生命有一種絕對",
@@ -625,17 +625,16 @@
     "guest": "周思齐",
     "start": 1839,
     "end": 2219,
-    "songAmount": 50,
+    "songAmount": 49,
     "requestSongList": [
       "而我知道",
       "好好",
-      "生日快樂",
       "借問眾神明",
       "愛情的模樣",
       "八月愛人"
     ],
     "guestSongList": ["周思齊應援曲", "心中無別人"],
-    "specialSongList": ["生日快樂", "周思齊應援曲", "心中無別人"],
+    "specialSongList": ["周思齊應援曲"],
     "encoreSongList": [
       "愛情萬歲",
       "如煙",
