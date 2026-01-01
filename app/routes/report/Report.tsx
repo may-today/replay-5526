@@ -1,14 +1,14 @@
 import { useAtomValue } from 'jotai'
 import { Activity, useEffect, useState } from 'react'
-// import AllListenedSongsStat from '~/components/reports/AllListenedSongsStat'
 import AttendedStat from '~/components/reports/AttendedStat'
 import AttendedStat2 from '~/components/reports/AttendedStat2'
 import CityStat from '~/components/reports/CityStat'
-// import EncoreSongStat from '~/components/reports/EncoreSongStat'
+import EncoreBallStat from '~/components/reports/EncoreBallStat'
 import GuestStat from '~/components/reports/GuestStat'
 import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
 import RandomSongStat from '~/components/reports/RandomSongStat'
 import RandomSongStat2 from '~/components/reports/RandomSongStat2'
+import SpecialEventStat, { shouldShowSpecialEventStat } from '~/components/reports/SpecialEventStat'
 import SpecialSongStat from '~/components/reports/SpecialSongStat'
 import {
   Carousel,
@@ -19,11 +19,6 @@ import {
   CarouselPrevious,
 } from '~/components/ui/carousel'
 import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
-
-// import RequestSongsStat from '~/components/reports/RequestSongsStat'
-// import SpecialEventStat, { shouldShowSpecialEventStat } from '~/components/reports/SpecialEventStat'
-// import TalkingStat, { shouldShowTalkingStat } from '~/components/reports/TalkingStat'
-// import Ending from './Ending'
 
 const Report: React.FC<{ username: string }> = ({ username }) => {
   const [api, setApi] = useState<CarouselApi>()
@@ -64,31 +59,25 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     SpecialSongStat,
     // 结尾歌曲统计
     // 大球颜色统计
+    EncoreBallStat,
     // 专属回忆
+    SpecialEventStat: shouldShowSpecialEventStat(selectedConcertDetails) ? SpecialEventStat : null,
     // Talking 统计
     // 年度关键词
     // 小票打印机
-
-    // 歌曲概览
-    // AllListenedSongsStat,
-    // RequestSongsStat,
-    // EncoreSongStat,
-    // SpecialEventStat: shouldShowSpecialEventStat(selectedConcertDetails) ? SpecialEventStat : null,
-    // TalkingStat: shouldShowTalkingStat(selectedConcertDetails, selectedConcertDateTypeMap) ? TalkingStat : null,
-    // Ending,
   }
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <Carousel className="flex h-full w-full flex-col" setApi={setApi}>
+      <Carousel className="flex h-full w-full flex-col" opts={{ watchDrag: false }} setApi={setApi}>
         <CarouselContent className="h-full">
           {Object.entries(slides)
             .filter(([_, Slide]) => !!Slide)
             .map(([key, SlideComponent], index) => (
-              <CarouselItem className="h-full select-none border-[0.5px] border-x" key={key}>
+              <CarouselItem className="h-full select-none border-x-[0.5px]" key={key}>
                 {/* 当前页、前一页保持活跃状态 */}
                 <Activity mode={index + 1 === currentIndex || index + 1 === currentIndex - 1 ? 'visible' : 'hidden'}>
-                  <SlideComponent focus />
+                  {SlideComponent ? <SlideComponent /> : null}
                 </Activity>
               </CarouselItem>
             ))}

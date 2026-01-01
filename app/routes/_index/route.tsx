@@ -21,7 +21,9 @@ export default function FormPage() {
       <div className="pointer-events-none absolute inset-0 z-0">
         <BackgroundSlider
           className="mask-t-from-60% mask-t-to-80% mask-b-from-20%"
-          images={bgImageNameList.map((name) => `https://wx-static.ddiu.site/cover/album/thumb/${name}.webp`)}
+          images={bgImageNameList.map(
+            (name) => `${import.meta.env.VITE_STATIC_FILE_HOST}/cover/album/thumb/${name}.webp`
+          )}
         />
         <GridBackground />
         <ShaderBackground />

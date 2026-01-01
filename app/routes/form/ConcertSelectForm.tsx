@@ -24,10 +24,10 @@ const ConcertSelectForm = () => {
 
   return (
     <div className="flex h-full flex-col gap-6">
-      <ScrollFadeEffect className="flex-1 space-y-8 px-8 py-12">
-        <h2>选择去过的场次和座位：</h2>
+      <p className="translate-y-1/2 px-8 pt-6">选择去过的场次和座位</p>
+      <ScrollFadeEffect className="flex-1 space-y-8 px-8">
         {Object.entries(cityConcertGroupList).map(([city, concerts]) => (
-          <div className="space-y-4" key={city}>
+          <div className="space-y-4 pt-4" key={city}>
             <h2 className="font-bold text-lg">{city.split('-')[0]}</h2>
             <div className="grid grid-cols-2 gap-4">
               {concerts.map((concert) => (
