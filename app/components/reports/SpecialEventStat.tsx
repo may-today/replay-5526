@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useAtomValue } from 'jotai'
-import { Play, X } from 'lucide-react'
-import { memo, useMemo, useState } from 'react'
+import { Blend, CircleDot, Play, X } from 'lucide-react'
+import { memo, useEffect, useMemo, useState } from 'react'
 import { ScrollFadeEffect } from '~/components/ui/scroll-fade-effect'
 import {
   VideoPlayer,
@@ -14,20 +14,27 @@ import {
 } from '~/components/VideoPlayer'
 import { type SpecialEvent, specialEventList } from '~/data/specialEvent'
 import type { Concert } from '~/data/types'
+import { concertListMap } from '~/lib/data'
 import { getConcertTitleByDate } from '~/lib/format'
 import { selectedNonOutdoorConcertDetailsAtom } from '~/stores/app'
+import { Button } from '../ui/button'
 
-export const shouldShowSpecialEventStat = (selectedConcertDetails: Concert[]) => {
-  const specialEventDateList = specialEventList.flatMap(([dates]) => dates)
-  const selectedEventDateAmount = selectedConcertDetails.filter((concert) =>
-    specialEventDateList.includes(concert.date)
-  ).length
-  return selectedEventDateAmount >= 1
-}
-
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: get data
 const getPageData = (selectedConcertDetails: Concert[]) => {
+  const allSpecialEventMap: Record<string, SpecialEvent[]> = {}
   const listenedSpecialEventMap: Record<string, SpecialEvent[]> = {}
   const usedEventIndexes: Set<number> = new Set()
+
+  for (const [eventDates, eventItem] of specialEventList) {
+    const date = eventDates[0]
+    if (!concertListMap[date]) {
+      continue
+    }
+    if (!allSpecialEventMap[date]) {
+      allSpecialEventMap[date] = []
+    }
+    allSpecialEventMap[date].push(eventItem)
+  }
 
   for (const concert of selectedConcertDetails) {
     for (let i = 0; i < specialEventList.length; i++) {
@@ -46,15 +53,23 @@ const getPageData = (selectedConcertDetails: Concert[]) => {
   }
 
   return {
+    allSpecialEventMap,
     listenedSpecialEventMap,
   }
 }
 
 const SpecialEventStat: React.FC = () => {
+  const [showAllEvents, setShowAllEvents] = useState(false)
   const selectedNonOutdoorConcertDetails = useAtomValue(selectedNonOutdoorConcertDetailsAtom)
   const data = useMemo(() => getPageData(selectedNonOutdoorConcertDetails), [selectedNonOutdoorConcertDetails])
   const [currentEvent, setCurrentEvent] = useState<SpecialEvent | null>(null)
   console.log('SpecialEventStat', data)
+
+  useEffect(() => {
+    if (Object.keys(data.listenedSpecialEventMap).length === 0) {
+      setShowAllEvents(true)
+    }
+  }, [data])
 
   return (
     <div className="relative h-full overflow-y-auto">
@@ -65,22 +80,37 @@ const SpecialEventStat: React.FC = () => {
         </div>
         <ScrollFadeEffect className="relative flex flex-1 items-center px-6" orientation="horizontal">
           <div className="flex w-max gap-4">
-            {Object.entries(data.listenedSpecialEventMap).map(([date, events]) => (
-              <>
-                {events.map((event, eventIndex) => (
-                  <SpecialEventItem
-                    date={date}
-                    event={event}
-                    key={event.noteId}
-                    onClick={() => setCurrentEvent(event)}
-                    showHeader={eventIndex === 0}
-                  />
-                ))}
-              </>
-            ))}
+            {Object.entries(showAllEvents ? data.allSpecialEventMap : data.listenedSpecialEventMap).map(
+              ([date, events]) => (
+                <>
+                  {events.map((event, eventIndex) => (
+                    <SpecialEventItem
+                      date={date}
+                      event={event}
+                      key={event.noteId}
+                      onClick={() => setCurrentEvent(event)}
+                      showHeader={eventIndex === 0}
+                    />
+                  ))}
+                </>
+              )
+            )}
             <SpecialEventEmptyItem />
           </div>
         </ScrollFadeEffect>
+        <div className="flex items-center justify-end px-6 pb-6">
+          {showAllEvents ? (
+            <Button className="text-white/30" onClick={() => setShowAllEvents(false)} size="xs" variant="ghost">
+              <CircleDot />
+              返回我的故事
+            </Button>
+          ) : (
+            <Button className="text-white/30" onClick={() => setShowAllEvents(true)} size="xs" variant="ghost">
+              <Blend />
+              查看全部故事...
+            </Button>
+          )}
+        </div>
       </div>
       <AnimatePresence>
         {currentEvent && <VideoDialog currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />}
@@ -183,7 +213,7 @@ const VideoDialog: React.FC<{
           />
           <div className="absolute top-2 right-2 z-10 flex items-center gap-2 text-xs">
             <button
-              className="cursor-pointer rounded-full bg-black/30 px-2 py-1 text-xs"
+              className="cursor-pointer rounded-full bg-black/25 px-2 py-1 text-xs"
               onClick={() => window.open(`https://www.xiaohongshu.com/explore/${currentEvent.noteId}`, '_blank')}
               type="button"
             >

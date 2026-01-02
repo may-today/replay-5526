@@ -8,7 +8,7 @@ import GuestStat from '~/components/reports/GuestStat'
 import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
 import RandomSongStat from '~/components/reports/RandomSongStat'
 import RandomSongStat2 from '~/components/reports/RandomSongStat2'
-import SpecialEventStat, { shouldShowSpecialEventStat } from '~/components/reports/SpecialEventStat'
+import SpecialEventStat from '~/components/reports/SpecialEventStat'
 import SpecialSongStat from '~/components/reports/SpecialSongStat'
 import {
   Carousel,
@@ -61,7 +61,7 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     // 大球颜色统计
     EncoreBallStat,
     // 专属回忆
-    SpecialEventStat: shouldShowSpecialEventStat(selectedConcertDetails) ? SpecialEventStat : null,
+    SpecialEventStat,
     // Talking 统计
     // 年度关键词
     // 小票打印机
