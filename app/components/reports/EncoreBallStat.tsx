@@ -10,7 +10,7 @@ import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { AnimatedGroup } from '../ui/animated-group'
 
-const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
+export const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
   const { selectedConcertDateTypeMap } = options
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
   const listenedBallColorListRaw = selectedDates.flatMap((date) => concertListMap[date].ballColorList)
@@ -26,10 +26,14 @@ const getPageData = (options: { selectedConcertDateTypeMap: Record<string, Conce
       )
     ).sort(([, a], [, b]) => b - a)
   )
+  /** 听过的场次大球颜色列表 */
+  const listenedBallColorList = Object.keys(listenedBallColorAmountMap)
 
   return {
     /** 听过的场次大球颜色数量字典 */
     listenedBallColorAmountMap,
+    /** 听过的场次大球颜色列表 */
+    listenedBallColorList,
   }
 }
 
@@ -51,11 +55,8 @@ const EncoreBallStat: React.FC = () => {
             <p>在 {Object.keys(ballColorMap).length} 种大球颜色中</p>
           </motion.div>
           <motion.p className="text-report-base" variants={itemVariants}>
-            你收集了{' '}
-            <NumberTicker className="text-report-lg" value={Object.keys(data.listenedBallColorAmountMap).length} /> 种
-            {Object.keys(data.listenedBallColorAmountMap).length === Object.keys(ballColorMap).length && (
-              <span>，掌声鼓励</span>
-            )}
+            你收集了 <NumberTicker className="text-report-lg" value={data.listenedBallColorList.length} /> 种
+            {data.listenedBallColorList.length === Object.keys(ballColorMap).length && <span>，掌声鼓励</span>}
           </motion.p>
           <motion.div>
             <ListenedBallGroup listenedBallColorAmountMap={data.listenedBallColorAmountMap} />
@@ -74,10 +75,10 @@ const ListenedBallGroup: React.FC<{ listenedBallColorAmountMap: Record<string, n
       {Object.entries(listenedBallColorAmountMap).map(([colorName, amount]) => {
         return (
           <div
-            className={clsx(['relative h-12 w-12 rounded-md border-2'])}
+            className="relative size-12 rounded-md border-2"
             key={colorName}
             style={{
-              backgroundColor: (ballColorMap as Record<string, string>)[colorName],
+              backgroundColor: ballColorMap[colorName],
             }}
           >
             <div className={clsx(['absolute -top-3 -right-3 rounded-full bg-black px-3 py-1 text-white'])}>

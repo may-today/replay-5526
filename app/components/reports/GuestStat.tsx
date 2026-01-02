@@ -34,7 +34,7 @@ import { selectedConcertDetailsAtom } from '~/stores/app'
 //   劉雨昕: Xin,
 // }
 
-const getPageData = (options: { selectedConcertDetails: Concert[] }) => {
+export const getPageData = (options: { selectedConcertDetails: Concert[] }) => {
   const { selectedConcertDetails } = options
   const allGuestConcertAmount = Object.values(concertListMap).filter((concert) => !!concert.guest).length
   const allGuestList = Array.from(
@@ -53,7 +53,9 @@ const getPageData = (options: { selectedConcertDetails: Concert[] }) => {
   )
   const allGuestSongAmount = allGuestSongList.length
   const allListenedGuestConcertList = selectedConcertDetails.filter((concert) => !!concert.guest)
-  const allListenedGuestList = Array.from(new Set(allListenedGuestConcertList.map((concert) => concert.guest)))
+  const allListenedGuestList = Array.from(
+    new Set(allListenedGuestConcertList.flatMap((concert) => concert.guest.split(',')))
+  )
   return {
     /** 总嘉宾场次 */
     allGuestConcertAmount,

@@ -10,7 +10,7 @@ export const ballColorMap = {
   blue: '#2563eb',
   purple: '#6d28d9',
   grass: '#65a30d',
-}
+} as Record<string, string>
 
 // used for gradient background
 export const ballColorMapLight = {
@@ -25,4 +25,4 @@ export const ballColorMapLight = {
   blue: '#60a5fa',
   purple: '#8b5cf6',
   grass: '#84cc16',
-}
+} as Record<string, string>

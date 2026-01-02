@@ -20,6 +20,7 @@ import {
   CarouselPrevious,
 } from '~/components/ui/carousel'
 import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
+import Ending from './Ending'
 
 const Report: React.FC<{ username: string }> = ({ username }) => {
   const [api, setApi] = useState<CarouselApi>()
@@ -66,8 +67,8 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     // 专属回忆
     SpecialEventStat,
     // Talking 统计
-    // 年度关键词
-    // 小票打印机
+    // Ending
+    Ending,
   }
 
   return (

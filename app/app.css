@@ -21,6 +21,7 @@ body {
 
   font-family: "Source Han Serif CN VF", serif;
   font-weight: "250 900";
+  overscroll-behavior-y: none;
 }
 
 :root {
@@ -357,5 +358,12 @@ body {
   }
   .receipt-font {
     font-family: "Courier Prime", "Source Han Serif CN VF", serif;
+  }
+
+  /* 自定义滚动条样式 - 隐藏 */
+  .receipt-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.3s ease;
   }
 }
