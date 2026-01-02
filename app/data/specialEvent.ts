@@ -384,4 +384,193 @@ export const specialEventList: [string[], SpecialEvent][] = [
       noteAuthor: 'Ming',
     },
   ],
+  [
+    ['2025.10.26'],
+    {
+      title: '技能五月天',
+      noteId: '68fe23ad0000000005002c2e',
+      noteDesc: '在厦门听到了技能五月天🤣',
+      noteAuthor: '烫金真爱册',
+    },
+  ],
+  [
+    ['2025.11.09'],
+    {
+      title: 'OAOA',
+      noteId: '692e2ba50000000019027816',
+      noteDesc: '现在几点？ 你还醒着 或是洗去一身的疲惫',
+      noteAuthor: '相信音乐Bin-music',
+    },
+  ],
+  [
+    ['2025.11.10'],
+    {
+      title: '点歌五首一起唱',
+      noteId: '6911dc4b00000000040116a8',
+      noteDesc: '史上最混乱点歌5首一起唱！！！',
+      noteAuthor: '单少今天更新了嘛！🥕',
+    },
+  ],
+  [
+    ['2025.11.10'],
+    {
+      title: '信兽打车',
+      noteId: '6911ee4c000000000302c848',
+      noteDesc: '我在八万人笑得好崩溃',
+      noteAuthor: 'habainwmsme',
+    },
+  ],
+  [
+    ['2025.11.15'],
+    {
+      title: '狐狸莎',
+      noteId: '69187a8b000000000501100f',
+      noteDesc: '在五月天演唱会这种场面也不奇怪了',
+      noteAuthor: '明天吃叉烧包',
+    },
+  ],
+  [
+    ['2025.11.15'],
+    {
+      title: '周末到河北',
+      noteId: '69186e8d00000000050329e5',
+      noteDesc: 'MDSH1115点歌！最强河北老师！！',
+      noteAuthor: '单少今天更新了嘛！🥕',
+    },
+  ],
+  [
+    ['2025.11.16'],
+    {
+      title: '青苹果🍏',
+      noteId: '6919f08800000000070029f8',
+      noteDesc: '大合唱！天幕全是青苹果的《一颗苹果》！！！！',
+      noteAuthor: '烙烙',
+    },
+  ],
+  [
+    ['2025.11.16'],
+    {
+      title: '吃苹果',
+      noteId: '6919d5540000000004012c76',
+      noteDesc: '起猛了，看到宝宝吃苹果了',
+      noteAuthor: 'ddddian_dian🥕',
+    },
+  ],
+  [
+    ['2025.11.16'],
+    {
+      title: '学跳舞',
+      noteId: '6919e0010000000004005eb1',
+      noteDesc: '陈信宏学跳舞一副豁出去了的劲头💃',
+      noteAuthor: '汪汪汪汪水管工王师傅🥕',
+    },
+  ],
+  [
+    ['2025.12.05'],
+    {
+      title: '蔡式凉茶',
+      noteId: '6932cf3f000000001e020a72',
+      noteDesc: '蔡式凉茶小剧场🙈',
+      noteAuthor: 'Ming',
+    },
+  ],
+  [
+    ['2025.12.05'],
+    {
+      title: '重要的事情',
+      noteId: '6932e97d000000001d038684',
+      noteDesc: '“接下来我要说一件重要的事情”',
+      noteAuthor: '不二慶_Qing',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: '生日快乐',
+      noteId: '6933ecbf000000000d03becb',
+      noteDesc: '自从遇见了你 才是「Happy. Birth. Day」🎂',
+      noteAuthor: '相信音乐Bin-music',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: '第二人生赴约',
+      noteId: '693a1cbd000000001d03d78d',
+      noteDesc: '相信五月天的力量！祝乐乐老师一切顺利！',
+      noteAuthor: '叫我橘子就好啦🥕',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: '情歌倒数生日快乐',
+      noteId: '6934068d000000001e02fb9d',
+      noteDesc: '全场一起唱情歌，「5.4.3.2.1生日快乐」。超大声超震撼。太好哭了。真的太浪漫了',
+      noteAuthor: 'ddddian_dian🥕',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: 'Bass生日快乐',
+      noteId: '693c2219000000001f0042e7',
+      noteDesc: '幸福，剛好夠用 🍏',
+      noteAuthor: '五月天阿信🥕',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: '生日蛋糕卜',
+      noteId: '69340237000000000d00edfa',
+      noteDesc: '太震撼了！内场全部举着生日蛋糕！',
+      noteAuthor: '态度正确',
+    },
+  ],
+  [
+    ['2025.12.06'],
+    {
+      title: '场外摇滚区',
+      noteId: '69344964000000001b021b53',
+      noteDesc: '今天場外絕對10K人',
+      noteAuthor: 'momo（被阿信點贊點好版）',
+    },
+  ],
+  [
+    ['2025.12.12'],
+    {
+      title: '石头吹蜡烛',
+      noteId: '693bfd3e000000001f00dbbc',
+      noteDesc: '给石头吹蜡烛了',
+      noteAuthor: 'Pancake🥕',
+    },
+  ],
+  [
+    ['2025.12.15'],
+    {
+      title: '陪你新年快乐',
+      noteId: '69416c87000000001e002d04',
+      noteDesc: '12.15他一个人站了很久，听我们说新年快乐',
+      noteAuthor: '每个渺小的理由都困住自由',
+    },
+  ],
+  [
+    ['2025.12.15'],
+    {
+      title: '谁说今天不能跨年呢',
+      noteId: '69400ed8000000001b0270e3',
+      noteDesc: '他给了我们独有的新年倒数计时',
+      noteAuthor: '曼曼丶Wraith🥕',
+    },
+  ],
+  [
+    ['2025.12.28'],
+    {
+      title: '小朋友合作入阵曲',
+      noteId: '695346a90000000022032e84',
+      noteDesc: '五月天鼓手大型「面试现场」🈶️回到那一天',
+      noteAuthor: '相信音乐Bin-music',
+    },
+  ],
 ] satisfies [string[], SpecialEvent][]
