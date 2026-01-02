@@ -9,7 +9,9 @@ import { convertHHmmToMinutes, convertHHmmToString, getConcertTitleByDate } from
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { BarList } from '../BarList'
 
-export const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
+export const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
+  console.log('getPageData', options)
+  const { selectedConcertDateTypeMap } = options
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
   const dateMinutesMap = selectedDates.reduce(
     (acc, date) => {
@@ -50,33 +52,34 @@ export const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSe
 // 场次概览2
 const AttendedStat2: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
-  const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
+  const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
+  console.log('AttendedStat2', data)
 
   return (
-    <div className="relative h-full overflow-y-auto">
-      <div className="flex-1 space-y-4 p-6">
-        {/* <TextAnimate animation="blurInUp" by="line" className="text-report-base" duration={1} once></TextAnimate> */}
-        <motion.div animate="visible" initial="hidden" variants={groupVariants}>
-          <motion.p className="mb-4 animate-flicker text-report-base opacity-50!" variants={itemVariants}>
-            全剧终
-            <br />
-            看见满场空座椅 灯亮起
-          </motion.p>
-          <motion.div className="text-report-base" variants={itemVariants}>
-            <p>这一年的时间坐标里，你和五月天占据了</p>
-            <p>
-              <NumberTicker value={data.totalMinutes} /> 分钟
-            </p>
-          </motion.div>
-          <motion.p className="text-report-base" variants={itemVariants}>
-            <span className="text-report-lg">{data.mostLateEndingNameList.join('、')}</span> 是夜色最深的一次
-          </motion.p>
-          <motion.p className="text-report-base" variants={itemVariants}>
-            指针停在 <span>{convertHHmmToString(data.mostLateEndingTime)}</span>，舞台的光才缓缓暗下
-          </motion.p>
+    <div className="relative h-full space-y-4 overflow-y-auto p-6">
+      <motion.div animate="visible" className="space-y-1" initial="hidden" variants={groupVariants}>
+        <motion.div className="mb-4 animate-flicker text-report-base opacity-50!" variants={itemVariants}>
+          <p>全剧终</p>
+          <p>看见满场空座椅 灯亮起</p>
         </motion.div>
+        <motion.div className="text-report-base" variants={itemVariants}>
+          <p>这一年的时间坐标里，你和五月天占据了</p>
+          <p>
+            <NumberTicker value={data.totalMinutes} /> 分钟
+          </p>
+        </motion.div>
+        <motion.p className="text-report-base" variants={itemVariants}>
+          <span className="text-report-base">{data.mostLateEndingNameList.join('、')}</span> 是
+          <span className="opacity-50"> 夜色最深 </span>
+          的一次
+        </motion.p>
+        <motion.p className="text-report-base" variants={itemVariants}>
+          指针停在 🕚 <span>{convertHHmmToString(data.mostLateEndingTime)}</span>，舞台的光才缓缓暗下
+        </motion.p>
+      </motion.div>
+      <motion.div animate={{ opacity: 1, transition: { delay: 1.5 } }} initial={{ opacity: 0 }}>
         <Chart data={data.dateMinutesList} />
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -13,7 +13,8 @@ import { getConcertTitleByDate, getSeasonByDate, removeYearFromDate } from '~/li
 import { selectedConcertDateTypeMapAtom, selectedRandomSongStat3IndexAtom } from '~/stores/app'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
 
-export const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
+export const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
+  const { selectedConcertDateTypeMap } = options
   /** 按场次统计的随机歌曲列表 */
   const randomSongListDict: Record<string, string[]> = Object.values(concertListMap).reduce(
     (acc, concert) => {
@@ -89,15 +90,16 @@ export const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSe
 }
 
 // 随机曲目统计（你的唯一）
-const RandomSongStat2: React.FC = () => {
+const RandomSongStat3: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
-  const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
+  const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
   const [selectTopSongIndex, setSelectTopSongIndex] = useAtom(selectedRandomSongStat3IndexAtom)
   const [currentDetailSong, setCurrentDetailSong] = useState<string | null>(null)
   const selectTopSongConcertList = useMemo(
     () => data.selectedTopRandomSongConcertListDict[data.selectedTopRandomSongList[selectTopSongIndex]],
     [data, selectTopSongIndex]
   )
+  console.log('RandomSongStat3', data)
   /** 当前选中的歌曲的场次详情列表 */
   const currentDetailSongConcertDetailList: { date: string; type: string }[] = useMemo(() => {
     if (!currentDetailSong) {
@@ -117,8 +119,6 @@ const RandomSongStat2: React.FC = () => {
       }
     })
   }, [data, currentDetailSong])
-
-  console.log('RandomSongStat2', data)
 
   const handleChangeSelectTopSong = () => {
     setSelectTopSongIndex((selectTopSongIndex + 1) % data.selectedTopRandomSongList.length)
@@ -145,25 +145,23 @@ const RandomSongStat2: React.FC = () => {
             </Tooltip>
           </motion.div>
         </motion.div>
-        <motion.div animate="visible" className="mt-4 space-y-2" initial="hidden" variants={groupVariants}>
-          <motion.p className="text-report-base leading-tight" variants={itemVariants}>
+        <motion.div animate="visible" className="mt-4 text-report-base" initial="hidden" variants={groupVariants}>
+          <motion.p variants={itemVariants}>
             在{getSeasonByDate(selectTopSongConcertList[0])}的 {removeYearFromDate(selectTopSongConcertList[0])}{' '}
             {getConcertTitleByDate(selectTopSongConcertList[0])} 第一次听到
           </motion.p>
-          <motion.p className="text-report-base leading-tight" variants={itemVariants}>
-            并在 {selectTopSongConcertList.length} 场演唱会中一次次重逢
-          </motion.p>
+          <motion.p variants={itemVariants}>并在 {selectTopSongConcertList.length} 场演唱会中一次次重逢</motion.p>
           {data.selectedNicheRandomSongList.length > 0 && (
             <>
-              <motion.p className="text-report-sm opacity-50!" variants={itemVariants}>
+              <motion.p className="mx-0 mt-2 text-report-sm opacity-50!" variants={itemVariants}>
                 另外，专属你的小众宝藏是{' '}
                 {data.selectedNicheRandomSongList
                   .slice(0, 3)
                   .map((song) => `《${song}》`)
                   .join('、')}
-                {data.selectedNicheRandomSongList.length > 1 && `等${data.selectedNicheRandomSongList.length}首`}
+                {data.selectedNicheRandomSongList.length > 3 && `等${data.selectedNicheRandomSongList.length}首`}
               </motion.p>
-              <motion.p className="text-report-sm opacity-50!" variants={itemVariants}>
+              <motion.p className="mx-0 text-report-sm opacity-50!" variants={itemVariants}>
                 今年只被唱过一次，恰好被幸运的你听见
               </motion.p>
             </>
@@ -221,4 +219,4 @@ const RandomSongStat2: React.FC = () => {
   )
 }
 
-export default memo(RandomSongStat2)
+export default memo(RandomSongStat3)

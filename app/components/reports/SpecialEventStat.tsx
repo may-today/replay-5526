@@ -20,7 +20,8 @@ import { selectedNonOutdoorConcertDetailsAtom } from '~/stores/app'
 import { Button } from '../ui/button'
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: get data
-const getPageData = (selectedConcertDetails: Concert[]) => {
+const getPageData = (options: { selectedConcertDetails: Concert[] }) => {
+  const { selectedConcertDetails } = options
   const allSpecialEventMap: Record<string, SpecialEvent[]> = {}
   const listenedSpecialEventMap: Record<string, SpecialEvent[]> = {}
   const usedEventIndexes: Set<number> = new Set()
@@ -61,7 +62,10 @@ const getPageData = (selectedConcertDetails: Concert[]) => {
 const SpecialEventStat: React.FC = () => {
   const [showAllEvents, setShowAllEvents] = useState(false)
   const selectedNonOutdoorConcertDetails = useAtomValue(selectedNonOutdoorConcertDetailsAtom)
-  const data = useMemo(() => getPageData(selectedNonOutdoorConcertDetails), [selectedNonOutdoorConcertDetails])
+  const data = useMemo(
+    () => getPageData({ selectedConcertDetails: selectedNonOutdoorConcertDetails }),
+    [selectedNonOutdoorConcertDetails]
+  )
   const [currentEvent, setCurrentEvent] = useState<SpecialEvent | null>(null)
   console.log('SpecialEventStat', data)
 
@@ -74,10 +78,10 @@ const SpecialEventStat: React.FC = () => {
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="flex h-full flex-1 flex-col space-y-4">
-        <div className="p-6 pb-2 opacity-50">
-          <div className="text-report-base">有你在的每一场</div>
-          <div className="text-report-base">一定都很特别</div>
-        </div>
+        <header className="p-6 pb-2 text-report-base opacity-50">
+          <p>有你在的每一场</p>
+          <p>一定都很特别</p>
+        </header>
         <ScrollFadeEffect className="relative flex flex-1 items-center px-6" orientation="horizontal">
           <div className="flex w-max gap-4">
             {Object.entries(showAllEvents ? data.allSpecialEventMap : data.listenedSpecialEventMap).map(

@@ -44,11 +44,11 @@ const BaseInformationForm: React.FC<{ onContinue: () => void }> = ({ onContinue 
         </div>
       </div>
       <Button
-        className="group h-12 w-full border border-white/30 bg-white/10 font-semibold text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20 active:scale-95"
+        className="group h-12 w-full rounded-full border border-white/30 bg-white/10 font-semibold text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20 active:scale-95"
         onClick={onContinue}
       >
         继续
-        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="size-5" />
       </Button>
     </div>
   )

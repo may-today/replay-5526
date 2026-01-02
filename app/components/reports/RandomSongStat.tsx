@@ -7,7 +7,8 @@ import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 
-const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
+const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
+  const { selectedConcertDateTypeMap } = options
   /** 总歌曲次数 */
   const totalSongTime = Object.values(concertListMap).reduce((acc, concert) => acc + concert.songAmount, 0)
   /** 按场次统计的随机歌曲列表 */
@@ -90,33 +91,32 @@ const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectTyp
 // 随机歌曲统计
 const RandomSongStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
-  const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
+  const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
+  console.log('RandomSongStat', data)
 
   return (
-    <div className="relative h-full overflow-y-auto">
-      <div className="flex-1 space-y-4 p-6">
-        <div className="text-right opacity-50">
-          <div className="text-report-base">这一年</div>
-          <div className="text-report-base">
-            <span>共演唱了 </span>
-            <NumberTicker value={data.totalSongTime} />
-            <span> 次，</span>
-            <NumberTicker value={data.totalSongAmount} />
-            <span> 首歌曲</span>
-          </div>
-          <div className="text-report-base">
-            <span>其中 </span>
-            <NumberTicker value={data.totalRandomSongAmount} />
-            <span> 首是那些不期而遇</span>
-          </div>
-          <div className="text-report-base">来自于点歌、安可的随机曲目</div>
-        </div>
-        <motion.div animate="visible" initial="hidden" variants={groupVariants}>
-          <motion.p className="text-report-base" variants={itemVariants}>
-            你听过 <NumberTicker className="text-report-lg" value={data.selectedRandomSongAmount} /> 首随机曲目
-          </motion.p>
-        </motion.div>
-      </div>
+    <div className="relative h-full space-y-4 overflow-y-auto p-6">
+      <header className="text-right text-report-base opacity-50">
+        <p>这一年</p>
+        <p>
+          <span>共演唱了 </span>
+          <NumberTicker value={data.totalSongTime} />
+          <span> 次，</span>
+          <NumberTicker value={data.totalSongAmount} />
+          <span> 首歌曲</span>
+        </p>
+        <p>
+          <span>其中 </span>
+          <NumberTicker value={data.totalRandomSongAmount} />
+          <span> 首是那些不期而遇</span>
+        </p>
+        <p>来自于点歌、安可的随机曲目</p>
+      </header>
+      <motion.div animate="visible" initial="hidden" variants={groupVariants}>
+        <motion.p className="text-report-base" variants={itemVariants}>
+          你听过 <NumberTicker className="text-report-lg" value={data.selectedRandomSongAmount} /> 首随机曲目
+        </motion.p>
+      </motion.div>
     </div>
   )
 }

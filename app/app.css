@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+@font-face {
+  font-display: swap;
+  font-family: "Courier Prime";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/courier-prime.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 html,
 body {
   @apply bg-background;
@@ -339,12 +347,15 @@ body {
 
 @layer components {
   .text-report-sm {
-    @apply text-base font-semibold mx-1 leading-normal;
+    @apply text-base font-semibold mx-1 leading-normal first:ml-0;
   }
   .text-report-base {
-    @apply text-lg font-semibold mx-1 leading-relaxed;
+    @apply text-lg font-semibold mx-1 leading-relaxed first:ml-0;
   }
   .text-report-lg {
     @apply text-3xl font-bold mx-1 first:ml-0;
+  }
+  .receipt-font {
+    font-family: "Courier Prime", "Source Han Serif CN VF", serif;
   }
 }

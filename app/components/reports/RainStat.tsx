@@ -1,7 +1,9 @@
 import { useAtomValue } from 'jotai'
+import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { Concert, ConcertSelectType } from '~/data/types'
+import { groupVariants, itemVariants } from '~/lib/animated'
 import { getConcertTitleByDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
 
@@ -29,10 +31,11 @@ export const isRainConcert = (concert: Concert, selectedConcertDateTypeMap: Reco
   return rainDateList.includes(concert.date) && selectedConcertDateTypeMap[concert.date] !== 'seats'
 }
 
-const getPageData = (
-  selectedConcertDetails: Concert[],
+const getPageData = (options: {
+  selectedConcertDetails: Concert[]
   selectedConcertDateTypeMap: Record<string, ConcertSelectType>
-) => {
+}) => {
+  const { selectedConcertDetails, selectedConcertDateTypeMap } = options
   const listenedRainList = selectedConcertDetails.filter((concert) =>
     isRainConcert(concert, selectedConcertDateTypeMap)
   )
@@ -46,40 +49,34 @@ const RainStat: React.FC = () => {
   const selectedConcertDetails = useAtomValue(selectedConcertDetailsAtom)
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(
-    () => getPageData(selectedConcertDetails, selectedConcertDateTypeMap),
+    () => getPageData({ selectedConcertDetails, selectedConcertDateTypeMap }),
     [selectedConcertDetails, selectedConcertDateTypeMap]
   )
   console.log('RainStat', data)
 
   return (
     <div className="relative h-full p-4">
-      <div className="absolute inset-0">
-        {/* <Rain dropletColor="rgb(60, 60, 60)" dropletOpacity={0.8} numDrops={120} /> */}
-      </div>
-      <div className="mb-6 text-right text-report-base opacity-50">
+      <header className="mb-6 text-right text-report-base opacity-50">
         <p>2025 年的第一天</p>
         <p>「回到那一天」在雨声中启程。</p>
-      </div>
+      </header>
       <div className="text-report-base">这一年，你和五月天一同淋过</div>
       <div className="text-report-base">
         <NumberTicker className="text-report-lg" value={data.listenedRainList.length} />
-        <span>场雨</span>
-        <div className="mt-2 text-right">
-          {data.listenedRainList.map((concert) => (
-            <div key={concert.date}>{/* <ConcertTitle className="text-report-lg" concert={concert} /> */}</div>
-          ))}
-        </div>
+        <span>场雨，落在</span>
       </div>
-      <div className="text-report-base">
-        <p>{data.listenedRainList.length > 1 ? '它们分别落在' : '落在'}</p>
-        <div className="mt-2 text-right">
-          {data.listenedRainList.map((concert) => (
-            <p className="text-report-lg" key={concert.date}>
-              {getConcertTitleByDate(concert.date)}
-            </p>
-          ))}
-        </div>
-      </div>
+      <motion.div
+        animate="visible"
+        className="mt-2 space-y-2 text-right text-report-lg"
+        initial="hidden"
+        variants={groupVariants}
+      >
+        {data.listenedRainList.map((concert) => (
+          <motion.p key={concert.date} variants={itemVariants}>
+            {getConcertTitleByDate(concert.date)}
+          </motion.p>
+        ))}
+      </motion.div>
     </div>
   )
 }

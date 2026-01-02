@@ -10,7 +10,8 @@ import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { AnimatedGroup } from '../ui/animated-group'
 
-const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
+const getPageData = (options: { selectedConcertDateTypeMap: Record<string, ConcertSelectType> }) => {
+  const { selectedConcertDateTypeMap } = options
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
   const listenedBallColorListRaw = selectedDates.flatMap((date) => concertListMap[date].ballColorList)
   /** 听过的场次大球颜色数量字典 */
@@ -35,15 +36,15 @@ const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectTyp
 // 大球颜色统计
 const EncoreBallStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
-  const data = useMemo(() => getPageData(selectedConcertDateTypeMap), [selectedConcertDateTypeMap])
+  const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
 
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="flex-1 space-y-4 p-6">
-        <div className="opacity-50">
-          <div className="text-report-base">你是否会期待</div>
-          <div className="text-report-base">每晚的安可大球</div>
-        </div>
+        <header className="text-right text-report-base opacity-50">
+          <p>你是否会期待</p>
+          <p>每晚的安可大球</p>
+        </header>
         <motion.div animate="visible" initial="hidden" variants={groupVariants}>
           <motion.div className="text-report-base" variants={itemVariants}>
             <p>这一年</p>
