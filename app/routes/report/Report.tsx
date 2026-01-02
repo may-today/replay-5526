@@ -1,5 +1,7 @@
 import { useAtomValue } from 'jotai'
+import { Home } from 'lucide-react'
 import { Activity, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 import AttendedStat from '~/components/reports/AttendedStat'
 import AttendedStat2 from '~/components/reports/AttendedStat2'
 import CityStat from '~/components/reports/CityStat'
@@ -11,6 +13,7 @@ import RandomSongStat2 from '~/components/reports/RandomSongStat2'
 import RandomSongStat3 from '~/components/reports/RandomSongStat3'
 import SpecialEventStat from '~/components/reports/SpecialEventStat'
 import SpecialSongStat from '~/components/reports/SpecialSongStat'
+import { Button } from '~/components/ui/button'
 import {
   Carousel,
   type CarouselApi,
@@ -23,8 +26,10 @@ import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/st
 import Ending from './Ending'
 
 const Report: React.FC<{ username: string }> = ({ username }) => {
+  const navigate = useNavigate()
   const [api, setApi] = useState<CarouselApi>()
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [pageCount, setPageCount] = useState(0)
   // 选择场次的数据，用于过滤不展示的报表页
   const selectedConcertDetails = useAtomValue(selectedConcertDetailsAtom)
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
@@ -35,6 +40,7 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     }
 
     setCurrentIndex(api.selectedScrollSnap() + 1)
+    setPageCount(api.scrollSnapList().length)
 
     api.on('select', () => {
       setCurrentIndex(api.selectedScrollSnap() + 1)
@@ -91,8 +97,22 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
             <p>{username ? `${username} 的` : '我的'} 5525+1 年度报告</p>
             <p className="opacity-50">replay.mayday.land</p>
           </div>
-          <CarouselPrevious className="translate-0 relative top-0 left-0" size="icon-lg" />
-          <CarouselNext className="translate-0 relative top-0 left-0" size="icon-lg" />
+          {currentIndex + 1 === pageCount ? (
+            <>
+              <CarouselPrevious className="translate-0 relative top-0 left-0" size="icon-lg" />
+              <CarouselNext className="translate-0 relative top-0 left-0" size="icon-lg" />
+            </>
+          ) : (
+            <Button
+              className="rounded-full bg-transparent! text-white/50"
+              onClick={() => navigate('/')}
+              size="xs"
+              variant="outline"
+            >
+              <Home strokeWidth={1} />
+              返回首页
+            </Button>
+          )}
         </footer>
       </Carousel>
     </div>

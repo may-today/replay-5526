@@ -1,4 +1,6 @@
 import clsx from 'clsx'
+import html2canvas from 'html2canvas-pro'
+import { ImageDown } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useRef, useState } from 'react'
 import Receipt from './Receipt'
@@ -7,7 +9,7 @@ type PrintingStatus = 'idle' | 'printing' | 'finished'
 
 const getButtonText = (status: PrintingStatus): string => {
   const textMap: Record<PrintingStatus, string> = {
-    idle: '生成报告',
+    idle: '生成你的报告',
     printing: '打印中...',
     finished: '保存图片',
   }
@@ -20,8 +22,8 @@ const Printer: React.FC = () => {
   const [animationDuration, setAnimationDuration] = useState(4)
   const receiptRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-
-  const handleStartPrinting = () => {
+  const [isSavingImage, setIsSavingImage] = useState(false)
+  const handleStartPrint = () => {
     setStatus('printing')
 
     // 获取小票的实际高度
@@ -37,10 +39,27 @@ const Printer: React.FC = () => {
     }
   }
 
-  const handleReset = () => {
-    setStatus('idle')
-    setReceiptHeight(0)
-    setAnimationDuration(4)
+  const handleSaveImage = async () => {
+    if (!receiptRef.current) {
+      return
+    }
+    setIsSavingImage(true)
+    try {
+      const canvas = await html2canvas(receiptRef.current, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+      })
+      const dataUrl = canvas.toDataURL('image/png')
+      const link = document.createElement('a')
+      link.download = `replay-${Date.now()}.png`
+      link.href = dataUrl
+      link.click()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setIsSavingImage(false)
+    }
   }
 
   const handleAnimationComplete = () => {
@@ -49,7 +68,7 @@ const Printer: React.FC = () => {
     }
   }
 
-  const isDisabled = status === 'printing'
+  const isDisabled = status === 'printing' || isSavingImage
   const isFinished = status === 'finished'
   const shouldShowReceipt = status === 'printing' || isFinished
 
@@ -92,48 +111,32 @@ const Printer: React.FC = () => {
           </div>
         </div>
 
-        {/* Machine Controls Detail */}
-        <div className="w-full space-y-4">
-          <div className="mt-4 flex gap-6 font-mono text-[10px] text-gray-400 uppercase tracking-[0.2em]">
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{
-                  backgroundColor: status === 'idle' ? 'rgb(34, 197, 94)' : 'rgb(55, 65, 81)',
-                  boxShadow: status === 'idle' ? '0 0 8px rgba(34, 197, 94, 0.6)' : 'none',
-                }}
-                className="h-1.5 w-1.5 rounded-full"
-                transition={{ duration: 0.3 }}
-              />
-              Standby
-            </div>
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{
-                  backgroundColor: status === 'printing' ? 'rgb(234, 179, 8)' : 'rgb(55, 65, 81)',
-                  boxShadow: status === 'printing' ? '0 0 8px rgba(234, 179, 8, 0.6)' : 'none',
-                }}
-                className="h-1.5 w-1.5 rounded-full"
-                transition={{ duration: 0.3 }}
-              />
-              Thermal Active
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <motion.button
-              className={`w-full rounded-xl py-2 font-bold text-lg shadow-lg ${
-                isFinished
-                  ? 'bg-gray-100 text-gray-900 hover:bg-white'
-                  : 'bg-blue-600 text-white hover:bg-blue-500 disabled:bg-gray-800 disabled:text-gray-600'
-              }`}
-              disabled={isDisabled}
-              onClick={isFinished ? handleReset : handleStartPrinting}
-              type="button"
-              whileHover={{ scale: isDisabled ? 1 : 1.02 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {getButtonText(status)}
-            </motion.button>
-          </div>
+        <motion.div
+          animate={{
+            backgroundColor: status === 'printing' ? 'rgb(234, 179, 8)' : 'rgb(55, 65, 81)',
+            boxShadow: status === 'printing' ? '0 0 8px rgba(234, 179, 8, 0.6)' : 'none',
+          }}
+          className="absolute top-2 left-2.5 size-1.5 rounded-full"
+          transition={{ duration: 0.3 }}
+        />
+
+        {/* Machine Controls Area */}
+        <div className="mt-8 flex items-center gap-4">
+          <motion.button
+            className={clsx([
+              'flex items-center justify-center gap-1',
+              'w-full rounded-xl border border-white/50 py-2 font-semibold opacity-100 shadow-lg transition-opacity',
+              'bg-white text-black disabled:opacity-50',
+            ])}
+            disabled={isDisabled}
+            onClick={isFinished ? handleSaveImage : handleStartPrint}
+            type="button"
+            whileHover={{ scale: isDisabled ? 1 : 1.02 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isFinished && <ImageDown className="size-4" />}
+            {getButtonText(status)}
+          </motion.button>
         </div>
       </div>
     </div>
