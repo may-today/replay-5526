@@ -2,11 +2,11 @@ import { useAtomValue } from 'jotai'
 import { motion } from 'motion/react'
 import { memo, useMemo, useState } from 'react'
 import type { ConcertSelectType } from '~/data/types'
+import { groupVariants, itemVariants } from '~/lib/animated'
 import { cityConcertGroupList, concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { DayHighlightType } from '../MonthGrid'
 import YearGrid, { type HighlightDateDict } from '../YearGrid'
-import { groupVariants, itemVariants } from './animated'
 
 const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
   const allDates = Object.keys(concertListMap)

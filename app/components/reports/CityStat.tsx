@@ -5,9 +5,9 @@ import { memo, useMemo } from 'react'
 import { InfiniteSlider } from '~/components/ui/infinite-slider'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { Concert } from '~/data/types'
+import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDetailsAtom, selectedCoordAtom } from '~/stores/app'
-import { groupVariants, itemVariants } from './animated'
 
 const allCityAmountMap = Object.values(concertListMap).reduce(
   (acc, concert) => {
@@ -36,7 +36,7 @@ const allCityCoordMap = {
   广州: [113.23, 23.16],
 } as Record<string, [number, number]>
 
-const getPageData = (selectedConcertDetails: Concert[], selectedCoord: [number, number] | null) => {
+export const getPageData = (selectedConcertDetails: Concert[], selectedCoord: [number, number] | null) => {
   const allListenedAmountMap = selectedConcertDetails.reduce(
     (acc, concert) => {
       acc[concert.city] = (acc[concert.city] || 0) + 1
@@ -146,7 +146,7 @@ const getDistance = ([lng1, lat1]: [number, number], [lng2, lat2]: [number, numb
   const b = (lng1 * Math.PI) / 180.0 - (lng2 * Math.PI) / 180.0
   let s = 2 * Math.asin(Math.sqrt(Math.sin(a / 2) ** 2 + Math.cos(radLat1) * Math.cos(radLat2) * Math.sin(b / 2) ** 2))
   s *= 6378.137
-  s = Math.round(s * 10_000) / 10_000
+  s = Math.round(s)
   return s
 }
 

@@ -8,6 +8,7 @@ import GuestStat from '~/components/reports/GuestStat'
 import RainStat, { shouldShowRainStat } from '~/components/reports/RainStat'
 import RandomSongStat from '~/components/reports/RandomSongStat'
 import RandomSongStat2 from '~/components/reports/RandomSongStat2'
+import RandomSongStat3 from '~/components/reports/RandomSongStat3'
 import SpecialEventStat from '~/components/reports/SpecialEventStat'
 import SpecialSongStat from '~/components/reports/SpecialSongStat'
 import {
@@ -52,8 +53,10 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
     GuestStat,
     // 随机歌曲统计
     RandomSongStat,
-    // 随机曲目统计（你的唯一）
+    // 随机曲目统计（串场）
     RandomSongStat2,
+    // 随机曲目统计（你的唯一）
+    RandomSongStat3,
     // 随机曲目统计（四宫格）
     // 特殊歌曲统计
     SpecialSongStat,

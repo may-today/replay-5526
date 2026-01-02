@@ -19,6 +19,9 @@ export const formatConcertTitle = (concert: Concert): string => {
 
 export const getConcertTitleByDate = (date: string): string => {
   const concert = concertListMap[date]
+  if (!concert) {
+    return '--'
+  }
   return formatConcertTitle(concert)
 }
 

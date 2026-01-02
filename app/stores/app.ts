@@ -15,6 +15,9 @@ export const selectedConcertDateTypeMapAtom = atomWithStorage<Record<string, Con
   'replay:selectedConcertDateTypeMap',
   {}
 )
+/** 随机曲目之最自选 index */
+export const selectedRandomSongStat3IndexAtom = atom(0)
+
 export const selectedConcertDetailsAtom = atom<Concert[]>((get) => {
   return Array.from(Object.keys(get(selectedConcertDateTypeMapAtom))).map((date) => concertListMap[date])
 })

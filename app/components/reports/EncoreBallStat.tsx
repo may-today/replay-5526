@@ -5,10 +5,10 @@ import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import { ballColorMap } from '~/data/ballColor'
 import type { ConcertSelectType } from '~/data/types'
+import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { AnimatedGroup } from '../ui/animated-group'
-import { groupVariants, itemVariants } from './animated'
 
 const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
   const selectedDates = Object.keys(selectedConcertDateTypeMap)

@@ -7,7 +7,7 @@ export const groupVariants = {
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: stagger(1),
+      delayChildren: stagger(0.5),
     },
   },
 }
@@ -24,11 +24,13 @@ export const itemVariants = {
 export const groupVariantsFast = {
   hidden: {
     opacity: 0,
+    y: -20,
   },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      delayChildren: stagger(0.1),
+      delayChildren: stagger(0.05),
     },
   },
 }

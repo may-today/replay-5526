@@ -56,8 +56,10 @@ const RainStat: React.FC = () => {
       <div className="absolute inset-0">
         {/* <Rain dropletColor="rgb(60, 60, 60)" dropletOpacity={0.8} numDrops={120} /> */}
       </div>
-      <div className="text-right text-report-base opacity-50">2025 年的第一天</div>
-      <div className="text-right text-report-base opacity-50">「回到那一天」在雨声中启程。</div>
+      <div className="mb-6 text-right text-report-base opacity-50">
+        <p>2025 年的第一天</p>
+        <p>「回到那一天」在雨声中启程。</p>
+      </div>
       <div className="text-report-base">这一年，你和五月天一同淋过</div>
       <div className="text-report-base">
         <NumberTicker className="text-report-lg" value={data.listenedRainList.length} />

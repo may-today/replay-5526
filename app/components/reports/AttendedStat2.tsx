@@ -3,13 +3,13 @@ import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { ConcertSelectType } from '~/data/types'
+import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { convertHHmmToMinutes, convertHHmmToString, getConcertTitleByDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { BarList } from '../BarList'
-import { groupVariants, itemVariants } from './animated'
 
-const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
+export const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectType>) => {
   const selectedDates = Object.keys(selectedConcertDateTypeMap)
   const dateMinutesMap = selectedDates.reduce(
     (acc, date) => {
@@ -17,7 +17,7 @@ const getPageData = (selectedConcertDateTypeMap: Record<string, ConcertSelectTyp
       if (concert.end && concert.start) {
         acc[date] = convertHHmmToMinutes(concert.end) - convertHHmmToMinutes(concert.start)
       } else {
-        acc[date] = 0
+        acc[date] = 180
       }
       return acc
     },
