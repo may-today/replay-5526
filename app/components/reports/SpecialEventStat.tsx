@@ -131,8 +131,8 @@ const SpecialEventEmptyItem: React.FC = () => {
     <div className="flex w-60 flex-col items-stretch gap-6">
       <div className="h-16" />
       <div className="relative flex h-[40vh] flex-col items-center justify-center rounded-xl bg-white/5 p-4 text-white/30">
-        <p>还有更多故事</p>
-        <p>等你续写</p>
+        <p className="animate-flicker">还有更多故事</p>
+        <p className="animate-flicker">等你续写</p>
       </div>
     </div>
   )
@@ -181,14 +181,22 @@ const VideoDialog: React.FC<{
             slot="media"
             src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-events/${currentEvent.noteId}.mp4`}
           />
-
-          <button
-            className="absolute top-2 right-2 z-10 cursor-pointer rounded-full p-1 transition-colors"
-            onClick={() => setCurrentEvent(null)}
-            type="button"
-          >
-            <X className="size-5 text-white" />
-          </button>
+          <div className="absolute top-2 right-2 z-10 flex items-center gap-2 text-xs">
+            <button
+              className="cursor-pointer rounded-full bg-black/30 px-2 py-1 text-xs"
+              onClick={() => window.open(`https://www.xiaohongshu.com/explore/${currentEvent.noteId}`, '_blank')}
+              type="button"
+            >
+              查看原笔记
+            </button>
+            <button
+              className="cursor-pointer rounded-full p-1 transition-colors"
+              onClick={() => setCurrentEvent(null)}
+              type="button"
+            >
+              <X className="size-5 text-white" />
+            </button>
+          </div>
           <VideoPlayerControlBar className="absolute bottom-0 left-1/2 flex w-full -translate-x-1/2 items-center justify-center px-5 mix-blend-exclusion">
             <VideoPlayerPlayButton className="h-4 bg-transparent" />
             <VideoPlayerTimeRange className="bg-transparent" />
