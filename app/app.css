@@ -137,43 +137,7 @@ body {
   }
 }
 
-@layer base {
-  :root {
-    /* Gradients */
-    --gradient-vinyl: radial-gradient(
-      ellipse at 30% 30%,
-      hsl(0 0% 20%) 0%,
-      hsl(0 0% 8%) 40%,
-      hsl(0 0% 5%) 100%
-    );
-  }
-}
-
-@layer components {
-  .vinyl-record {
-    background: var(--gradient-vinyl);
-    box-shadow: var(--shadow-vinyl);
-  }
-
-  .vinyl-grooves {
-    background: var(--gradient-grooves);
-  }
-}
-
 @layer utilities {
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 24s linear infinite;
-  }
-
   @keyframes flicker {
     0%,
     100% {

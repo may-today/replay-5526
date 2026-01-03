@@ -22,6 +22,10 @@ const ConcertSelectForm = () => {
   const setSelectedConcertDate = useSetAtom(setSelectedConcertDateAtom)
   const navigate = useNavigate()
 
+  const handleSubmit = () => {
+    navigate('/loading', { replace: true, viewTransition: true, state: { fromIndex: true } })
+  }
+
   return (
     <div className="flex h-full flex-col gap-6">
       <p className="translate-y-1/2 px-8 pt-6">选择去过的场次和座位</p>
@@ -44,13 +48,9 @@ const ConcertSelectForm = () => {
       </ScrollFadeEffect>
       {Object.keys(selectedConcertDateTypeMap).length > 0 && (
         <div className="px-8 pb-12">
-          <SlideToUnlock
-            className="w-full bg-transparent! ring-0"
-            handleWidth={80}
-            onUnlock={() => navigate('/loading', { replace: true, viewTransition: true })}
-          >
+          <SlideToUnlock className="w-full bg-transparent! ring-0" handleWidth={80} onUnlock={handleSubmit}>
             <SlideToUnlockTrack className="h-5 rounded-full bg-white/10 backdrop-blur-md">
-              <SlideToUnlockText>
+              <SlideToUnlockText className="flex -translate-x-2 items-center">
                 <span className="animate-pulse text-muted-foreground text-xs">滑动解锁你的年度报告</span>
               </SlideToUnlockText>
               <SlideToUnlockHandle className="-top-3 bg-transparent!">

@@ -34,6 +34,7 @@ const ThanksListDialog: React.FC<React.PropsWithChildren> = ({ children }) => {
               </li>
               <li>专辑及嘉宾图片来自互联网</li>
               <li>「专属回忆」环节来自于小红书全体 wmls</li>
+              <li>贴纸、印章等素材由 Gemini 3 Pro Image (Nano Banana Pro) 生成</li>
             </ul>
             <p className="my-4">技术信息：</p>
             <ul className="list-inside list-disc">

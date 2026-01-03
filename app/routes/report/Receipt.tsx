@@ -3,10 +3,8 @@ import { useMemo } from 'react'
 import receiptLogo from '~/assets/5525.png'
 import { getPageData as getAttendedStat2Data } from '~/components/reports/AttendedStat2'
 import { getPageData as getCityStatData } from '~/components/reports/CityStat'
-import { getPageData as getEncoreBallStatData } from '~/components/reports/EncoreBallStat'
 import { getPageData as getGuestStatData } from '~/components/reports/GuestStat'
 import { getPageData as getRandomSongStat3Data } from '~/components/reports/RandomSongStat3'
-import { ballColorMap } from '~/data/ballColor'
 import type { Concert, ConcertSelectType } from '~/data/types'
 import { cityImgIdMap, cityPlaceMap } from '~/lib/data'
 import { getConcertTitleByDate, removeYearFromDate } from '~/lib/format'
@@ -48,7 +46,6 @@ const getPageData = (options: {
   const cityStatData = getCityStatData({ selectedConcertDetails, selectedCoord })
   const randomSongStat3Data = getRandomSongStat3Data({ selectedConcertDateTypeMap })
   const guestStatData = getGuestStatData({ selectedConcertDetails })
-  const encoreBallStatData = getEncoreBallStatData({ selectedConcertDateTypeMap })
   return {
     selectConcertItemList: selectedConcertDetails.map((concert) => ({
       date: removeYearFromDate(concert.date),
@@ -63,7 +60,6 @@ const getPageData = (options: {
     selectedTopRandomSongList: randomSongStat3Data.selectedTopRandomSongList,
     selectedNicheRandomSongList: randomSongStat3Data.selectedNicheRandomSongList,
     allListenedGuestList: guestStatData.allListenedGuestList,
-    listenedBallColorList: encoreBallStatData.listenedBallColorList,
   }
 }
 
@@ -143,23 +139,6 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
             <div>年度最小众:{data.selectedNicheRandomSongList.map((song) => `《${song}》`).join('、')}</div>
           )}
           {data.allListenedGuestList.length > 0 && <div>嘉宾:{data.allListenedGuestList.join('、')}</div>}
-          {/* Encore Ball Info */}
-          {data.listenedBallColorList.length > 1 && (
-            <div className="my-1 flex flex-wrap">
-              {data.listenedBallColorList.map((color) => (
-                <div
-                  className="relative h-1.5 flex-1"
-                  key={color}
-                  style={{
-                    backgroundColor: ballColorMap[color],
-                  }}
-                >
-                  {/* 老式打印机暗色遮罩 */}
-                  <div className="absolute inset-0 bg-black/30" />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* City Stamp Area */}
@@ -190,31 +169,28 @@ const CityStampArea: React.FC<{ cityList: string[] }> = ({ cityList }) => {
   const getTranslate = (city: string, index: number) => {
     const hash1 = city.split('').reduce((acc, char) => acc + char.charCodeAt(0), index * 173)
     const hash2 = city.split('').reduce((acc, char) => acc + char.charCodeAt(0) * 2, index * 239)
-    const x = (hash1 % 20) - 10
+    const x = (hash1 % 10) - 5
     const y = (hash2 % 10) - 5
     return { x, y }
   }
 
   return (
-    <div className="h-36">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        {cityList.map((city, index) => {
-          const translate = getTranslate(city, index)
-          return (
-            <img
-              alt={city}
-              className="w-1/4 object-contain transition-transform duration-300 hover:z-10 hover:scale-110"
-              key={city}
-              src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/stadim-monochrome/${cityImgIdMap[city]}.webp`}
-              style={{
-                transform: `translate(${translate.x}px, ${translate.y}px) rotate(${getRotation(city, index)}deg)`,
-                marginLeft: index > 0 ? '-16px' : '0',
-              }}
-              width={120}
-            />
-          )
-        })}
-      </div>
+    <div className="flex flex-wrap items-center justify-center gap-3 py-4 opacity-60">
+      {cityList.map((city, index) => {
+        const translate = getTranslate(city, index)
+        return (
+          <img
+            alt={city}
+            className="max-w-1/5 object-contain"
+            key={city}
+            src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/stadim-monochrome/${cityImgIdMap[city]}.webp`}
+            style={{
+              transform: `translate(${translate.x}px, ${translate.y}px) rotate(${getRotation(city, index)}deg)`,
+            }}
+            width={50}
+          />
+        )
+      })}
     </div>
   )
 }
