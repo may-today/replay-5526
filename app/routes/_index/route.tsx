@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router'
 import logo from '~/assets/logo.svg'
 import GridBackground from '~/components/GridBackground'
 import NoiseBackground from '~/components/NoiseBackground'
+import ThanksListDialog from '~/components/ThanksListDialog'
 import BackgroundSlider from './BackgroundSlider'
 import NextButton from './NextButton'
 import ShaderBackground from './ShaderBackground'
@@ -16,7 +17,7 @@ export default function FormPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex h-full flex-col items-center justify-stretch overflow-hidden">
+    <div className="relative flex h-full flex-col items-center justify-stretch overflow-hidden">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <BackgroundSlider
@@ -36,7 +37,7 @@ export default function FormPage() {
       </main>
 
       {/* Footer */}
-      <div className="absolute inset-x-0 bottom-14 z-20 flex justify-center">
+      <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col items-center justify-center gap-6">
         <NextButton
           onClick={() =>
             navigate('/form', {
@@ -44,6 +45,18 @@ export default function FormPage() {
             })
           }
         />
+        <div className="flex w-full items-center justify-end gap-2 px-6 text-right text-xs opacity-30">
+          <div>
+            <span className="opacity-80">Made by </span>
+            <a className="underline" href="https://ddiu.io" rel="noopener" target="_blank">
+              Diu
+            </a>
+          </div>
+          <span className="opacity-80">·</span>
+          <ThanksListDialog>
+            <span className="cursor-pointer underline">感谢名单</span>
+          </ThanksListDialog>
+        </div>
       </div>
     </div>
   )

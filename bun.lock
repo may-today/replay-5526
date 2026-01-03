@@ -40,7 +40,6 @@
         "tailwind-merge": "^3.4.0",
         "three": "^0.182.0",
         "three-stdlib": "^2.36.1",
-        "unicornstudio-react": "^1.5.2",
       },
       "devDependencies": {
         "@biomejs/biome": "2.3.10",
@@ -1360,8 +1359,6 @@
     "undici-types": ["undici-types@6.21.0", "", {}, "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="],
 
     "unicorn-magic": ["unicorn-magic@0.3.0", "", {}, "sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA=="],
-
-    "unicornstudio-react": ["unicornstudio-react@1.5.2", "", { "peerDependencies": { "react": ">=18.0.0", "react-dom": ">=18.0.0" } }, "sha512-J0gHjw2mt8MWZpJ0dk5boeR2FRyEJE7sfDtpMNw/EY3EMSfBVYFZDiDUlyNn+w3WoKigi8dGL8mxlWt7hgMvFg=="],
 
     "universalify": ["universalify@2.0.1", "", {}, "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="],
 

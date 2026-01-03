@@ -185,7 +185,7 @@ const RandomSongStat3: React.FC = () => {
         </p>
       </div>
       <Dialog onOpenChange={(open) => !open && setCurrentDetailSong(null)} open={!!currentDetailSong}>
-        <DialogContent>
+        <DialogContent className="bg-background/60 backdrop-blur-sm">
           <DialogHeader>
             <DialogTitle className="mx-0 text-report-base">{currentDetailSong}</DialogTitle>
             <DialogDescription>我与 TA 的相遇故事</DialogDescription>
