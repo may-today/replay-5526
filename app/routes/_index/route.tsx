@@ -5,7 +5,7 @@ import NoiseBackground from '~/components/NoiseBackground'
 import ThanksListDialog from '~/components/ThanksListDialog'
 import BackgroundSlider from './BackgroundSlider'
 import NextButton from './NextButton'
-import ShaderBackground from './ShaderBackground'
+import SilkBackground from './SilkBackground'
 
 export const meta = () => {
   return [{ title: 'Replay 5525+1 年度报告' }, { name: 'description', content: 'Replay 5525+1 年度报告' }]
@@ -27,13 +27,14 @@ export default function FormPage() {
           )}
         />
         <GridBackground />
-        <ShaderBackground />
+        <SilkBackground />
         <NoiseBackground />
       </div>
 
       {/* Main */}
       <main className="z-10 flex w-full flex-1 flex-col items-start px-6 py-8 sm:px-12 sm:py-12">
         <img alt="logo" className="w-40 opacity-75" height={100} src={logo} width={100} />
+        {/* <TextRoll className="text-4xl text-black dark:text-white">5525+1 年度报告</TextRoll> */}
       </main>
 
       {/* Footer */}
