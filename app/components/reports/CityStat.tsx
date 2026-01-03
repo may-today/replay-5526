@@ -7,6 +7,7 @@ import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDetailsAtom, selectedCoordAtom } from '~/stores/app'
+import CityStickerBackground from '../CityStickerBackground'
 
 const allCityAmountMap = Object.values(concertListMap).reduce(
   (acc, concert) => {
@@ -70,12 +71,14 @@ const CityStat: React.FC = () => {
     [selectedConcertDetails, selectedCoord]
   )
   console.log('CityStat', data)
-  useReportBackground(null)
+  useReportBackground('aurora')
 
   return (
     <div className="relative h-full w-full overflow-hidden py-4">
-      <div className="absolute inset-0 z-0" />
-      <div className="absolute right-0 bottom-0 left-0 z-10 px-6 py-6">
+      <div className="mask-b-from-40% mask-b-to-90% absolute inset-0 z-0">
+        <CityStickerBackground cityList={data.allListenedCityList} />
+      </div>
+      <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-10 px-6 py-6">
         <motion.div animate="visible" className="space-y-1 text-report-base" initial="hidden" variants={groupVariants}>
           <motion.p className="text-report-base opacity-50!" variants={itemVariants}>
             这一年，你走过 <NumberTicker value={data.allListenedCityList.length} /> 座城市
