@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { ScrollFadeEffect } from '~/components/ui/scroll-fade-effect'
 import { SparklesText } from '~/components/ui/sparkles-text'
 import type { ConcertSelectType } from '~/data/types'
-import { groupVariants, groupVariantsFast, itemVariants } from '~/lib/animated'
+import { useReportBackground } from '~/hooks/useReportBackground'
+import { groupVariantsFast, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { getConcertTitleByDate, getSeasonByDate, removeYearFromDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom, selectedRandomSongStat3IndexAtom } from '~/stores/app'
@@ -100,6 +101,7 @@ const RandomSongStat3: React.FC = () => {
     [data, selectTopSongIndex]
   )
   console.log('RandomSongStat3', data)
+  useReportBackground('star', 0.5)
   /** 当前选中的歌曲的场次详情列表 */
   const currentDetailSongConcertDetailList: { date: string; type: string }[] = useMemo(() => {
     if (!currentDetailSong) {
@@ -127,51 +129,44 @@ const RandomSongStat3: React.FC = () => {
   return (
     <div className="relative h-full overflow-hidden p-6 pb-2">
       <div className="flex h-full flex-1 flex-col space-y-4 overflow-hidden">
-        <motion.div animate="visible" className="space-y-4" initial="hidden" variants={groupVariants}>
-          <motion.div variants={itemVariants}>
-            <Tooltip defaultOpen={true} open={data.selectedTopRandomSongList.length > 1 ? undefined : false}>
-              <TooltipTrigger
-                disabled={data.selectedTopRandomSongList.length === 1}
-                onClick={handleChangeSelectTopSong}
-              >
-                <SparklesText className="text-4xl text-report-lg">
-                  {data.selectedTopRandomSongList[selectTopSongIndex]}
-                </SparklesText>
-              </TooltipTrigger>
-              <TooltipContent className="flex items-center gap-1" side="right">
-                <RefreshCw size={12} strokeWidth={1} />
-                不是TA？换一个
-              </TooltipContent>
-            </Tooltip>
-          </motion.div>
-        </motion.div>
-        <motion.div animate="visible" className="mt-4 text-report-base" initial="hidden" variants={groupVariants}>
-          <motion.p variants={itemVariants}>
+        <div>
+          <Tooltip defaultOpen={true} open={data.selectedTopRandomSongList.length > 1 ? undefined : false}>
+            <TooltipTrigger disabled={data.selectedTopRandomSongList.length === 1} onClick={handleChangeSelectTopSong}>
+              <SparklesText className="text-4xl text-report-lg">
+                {data.selectedTopRandomSongList[selectTopSongIndex]}
+              </SparklesText>
+            </TooltipTrigger>
+            <TooltipContent className="flex items-center gap-1" side="right">
+              <RefreshCw size={12} strokeWidth={1} />
+              不是TA？换一个
+            </TooltipContent>
+          </Tooltip>
+        </div>
+        <div className="mx-0 mt-4 text-report-base">
+          <p>
             在{getSeasonByDate(selectTopSongConcertList[0])}的 {removeYearFromDate(selectTopSongConcertList[0])}{' '}
             {getConcertTitleByDate(selectTopSongConcertList[0])} 第一次听到
-          </motion.p>
-          <motion.p variants={itemVariants}>并在 {selectTopSongConcertList.length} 场演唱会中一次次重逢</motion.p>
+          </p>
+          <p>并在 {selectTopSongConcertList.length} 场演唱会中一次次重逢</p>
           {data.selectedNicheRandomSongList.length > 0 && (
             <>
-              <motion.p className="mx-0 mt-2 text-report-sm opacity-50!" variants={itemVariants}>
+              <p className="mx-0 mt-2 text-report-sm opacity-50!">
                 另外，专属你的小众宝藏是{' '}
                 {data.selectedNicheRandomSongList
                   .slice(0, 3)
                   .map((song) => `《${song}》`)
                   .join('、')}
                 {data.selectedNicheRandomSongList.length > 3 && `等${data.selectedNicheRandomSongList.length}首`}
-              </motion.p>
-              <motion.p className="mx-0 text-report-sm opacity-50!" variants={itemVariants}>
-                今年只被唱过一次，恰好被幸运的你听见
-              </motion.p>
+              </p>
+              <p className="mx-0 text-report-sm opacity-50!">今年只被唱过一次，恰好被幸运的你听见</p>
             </>
           )}
-        </motion.div>
+        </div>
         <ScrollFadeEffect className="flex-1">
           <motion.ul animate="visible" initial="hidden" variants={groupVariantsFast}>
             {data.selectedRandomSongSortedEntries.map(([song, amount]) => (
               <motion.li
-                className="flex items-center gap-2 border-white/10 border-b py-1 text-report-sm text-white/70 transition-colors last:border-b-0 hover:bg-white/10 active:bg-white/10"
+                className="mx-0 flex items-center gap-2 border-white/10 border-b py-1 text-report-sm text-white/70 transition-colors last:border-b-0 hover:bg-white/10 active:bg-white/10"
                 key={song}
                 onClick={() => setCurrentDetailSong(song)}
                 variants={itemVariants}

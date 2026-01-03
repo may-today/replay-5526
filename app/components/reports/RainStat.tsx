@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { Concert, ConcertSelectType } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
 import { getConcertTitleByDate } from '~/lib/format'
 import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
@@ -53,6 +54,7 @@ const RainStat: React.FC = () => {
     [selectedConcertDetails, selectedConcertDateTypeMap]
   )
   console.log('RainStat', data)
+  useReportBackground(null)
 
   return (
     <div className="relative h-full p-4">

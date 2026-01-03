@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import NoiseBackground from '~/components/NoiseBackground'
+import ReportBackground from '~/components/ReportBackground'
 import { selectedConcertDateTypeMapAtom, usernameAtom } from '~/stores/app'
 import Report from './Report'
 
@@ -28,9 +28,7 @@ export default function ReportPage() {
   return (
     <div className="flex h-full flex-col overflow-hidden">
       {/* Background */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <NoiseBackground opacity={0.03} />
-      </div>
+      <ReportBackground />
 
       {/* Main */}
       <Report username={username} />

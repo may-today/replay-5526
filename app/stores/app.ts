@@ -2,7 +2,7 @@ import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 import { geoCoordMap } from '~/data/geoCoord'
-import type { Concert, ConcertSelectType } from '~/data/types'
+import type { Concert, ConcertSelectType, ReportBackground } from '~/data/types'
 import { concertListMap } from '~/lib/data'
 
 export const usernameAtom = atomWithStorage<string>('replay:username', '')
@@ -17,6 +17,11 @@ export const selectedConcertDateTypeMapAtom = atomWithStorage<Record<string, Con
 )
 /** 随机曲目之最自选 index */
 export const selectedRandomSongStat3IndexAtom = atom(0)
+/** 随报告进度更新的背景 */
+export const selectedReportBackgroundAtom = atom<ReportBackground>({
+  type: null,
+  opacity: 1,
+})
 
 export const selectedConcertDetailsAtom = atom<Concert[]>((get) => {
   return Array.from(Object.keys(get(selectedConcertDateTypeMapAtom))).map((date) => concertListMap[date])

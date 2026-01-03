@@ -14,6 +14,7 @@ import {
 } from '~/components/VideoPlayer'
 import { type SpecialEvent, specialEventList } from '~/data/specialEvent'
 import type { Concert } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { concertListMap } from '~/lib/data'
 import { getConcertTitleByDate } from '~/lib/format'
 import { selectedNonOutdoorConcertDetailsAtom } from '~/stores/app'
@@ -68,6 +69,7 @@ const SpecialEventStat: React.FC = () => {
   )
   const [currentEvent, setCurrentEvent] = useState<SpecialEvent | null>(null)
   console.log('SpecialEventStat', data)
+  useReportBackground('ball', 0.2)
 
   useEffect(() => {
     if (Object.keys(data.listenedSpecialEventMap).length === 0) {
@@ -104,12 +106,12 @@ const SpecialEventStat: React.FC = () => {
         </ScrollFadeEffect>
         <div className="flex items-center justify-end px-6 pb-6">
           {showAllEvents ? (
-            <Button className="text-white/30" onClick={() => setShowAllEvents(false)} size="xs" variant="ghost">
+            <Button className="text-white/30" onClick={() => setShowAllEvents(false)} size="xs" variant="outline">
               <CircleDot />
               返回我的故事
             </Button>
           ) : (
-            <Button className="text-white/30" onClick={() => setShowAllEvents(true)} size="xs" variant="ghost">
+            <Button className="text-white/30" onClick={() => setShowAllEvents(true)} size="xs" variant="outline">
               <Blend />
               查看全部故事...
             </Button>
@@ -140,15 +142,14 @@ const SpecialEventItem: React.FC<{
         onClick={onClick}
         type="button"
       >
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-black">
           <img
             alt={event.title}
-            className="h-full w-full object-cover"
+            className="mask-t-from-60% mask-t-to-120% mask-b-from-20% h-full w-full object-cover"
             height={160}
             src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-events/${event.noteId}.webp`}
             width={160}
           />
-          <div className="absolute inset-0 bg-linear-to-b from-black/75 to-black/50" />
         </div>
         <p className="z-10 flex-1 text-left text-2xl text-white/80">#{event.title}</p>
         <div className="z-10 flex items-center gap-3">

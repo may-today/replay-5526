@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { Concert } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDetailsAtom, selectedCoordAtom } from '~/stores/app'
@@ -69,6 +70,7 @@ const CityStat: React.FC = () => {
     [selectedConcertDetails, selectedCoord]
   )
   console.log('CityStat', data)
+  useReportBackground(null)
 
   return (
     <div className="relative h-full w-full overflow-hidden py-4">

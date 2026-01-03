@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import type { ConcertSelectType } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
@@ -93,6 +94,7 @@ const RandomSongStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
   console.log('RandomSongStat', data)
+  useReportBackground(null)
 
   return (
     <div className="relative h-full space-y-4 overflow-y-auto p-6">

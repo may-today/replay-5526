@@ -2,6 +2,7 @@ import { useAtomValue } from 'jotai'
 import { motion, stagger } from 'motion/react'
 import { memo, useMemo, useState } from 'react'
 import type { ConcertSelectType } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { itemVariants } from '~/lib/animated'
 import { cityConcertGroupList, concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
@@ -34,6 +35,7 @@ const AttendedStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
   console.log('AttendedStat', data)
+  useReportBackground('star', 0.3)
 
   return (
     <div className="relative h-full space-y-4 overflow-y-auto p-6">

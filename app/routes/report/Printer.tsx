@@ -16,7 +16,7 @@ const getButtonText = (status: PrintingStatus): string => {
   return textMap[status]
 }
 
-const Printer: React.FC = () => {
+const Printer: React.FC<{ onPrintStart?: () => void }> = ({ onPrintStart }) => {
   const [status, setStatus] = useState<PrintingStatus>('idle')
   const [receiptHeight, setReceiptHeight] = useState(0)
   const [animationDuration, setAnimationDuration] = useState(4)
@@ -25,7 +25,7 @@ const Printer: React.FC = () => {
   const [isSavingImage, setIsSavingImage] = useState(false)
   const handleStartPrint = () => {
     setStatus('printing')
-
+    onPrintStart?.()
     // 获取小票的实际高度
     if (receiptRef.current) {
       const height = receiptRef.current.scrollHeight
@@ -89,7 +89,7 @@ const Printer: React.FC = () => {
               ])}
               ref={scrollContainerRef}
               style={{
-                maxHeight: 'calc(100vh - 240px)', // 屏幕高度减去打印机和其他元素占用的空间
+                maxHeight: 'calc(100vh - 160px)', // 屏幕高度减去打印机和其他元素占用的空间
               }}
             >
               {/* 内层容器：使用 motion 动画控制小票抽出效果，打印过程中保持底部对齐 */}

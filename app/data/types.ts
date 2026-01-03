@@ -45,3 +45,8 @@ export enum SongType {
 }
 
 export type ConcertSelectType = null | 'unknown' | 'outdoor' | 'ground' | 'seats'
+
+export interface ReportBackground {
+  type: 'star' | 'aurora' | 'ball' | null
+  opacity: number
+}

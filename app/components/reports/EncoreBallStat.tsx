@@ -1,11 +1,13 @@
 import clsx from 'clsx'
 import { useAtomValue } from 'jotai'
 import { motion } from 'motion/react'
-import { memo, useMemo } from 'react'
+import { memo, useContext, useEffect, useMemo } from 'react'
 import { NumberTicker } from '~/components/ui/number-ticker'
 import { ballColorMap } from '~/data/ballColor'
 import type { ConcertSelectType } from '~/data/types'
+import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
+import { CurrentInViewContext } from '~/lib/context'
 import { concertListMap } from '~/lib/data'
 import { selectedConcertDateTypeMapAtom } from '~/stores/app'
 import { AnimatedGroup } from '../ui/animated-group'
@@ -41,27 +43,38 @@ export const getPageData = (options: { selectedConcertDateTypeMap: Record<string
 const EncoreBallStat: React.FC = () => {
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const data = useMemo(() => getPageData({ selectedConcertDateTypeMap }), [selectedConcertDateTypeMap])
+  const { inView } = useContext(CurrentInViewContext)
+  console.log('EncoreBallStat', data)
+  const { triggerReportBackground } = useReportBackground(null)
+
+  useEffect(() => {
+    if (inView) {
+      setTimeout(() => {
+        triggerReportBackground('ball', 0.8)
+      }, 1500)
+    }
+  }, [inView, triggerReportBackground])
 
   return (
     <div className="relative h-full overflow-y-auto">
-      <div className="flex-1 space-y-4 p-6">
+      <div className="relative z-10 flex-1 space-y-4 p-6">
         <header className="text-right text-report-base opacity-50">
           <p>你是否会期待</p>
           <p>每晚的安可大球</p>
         </header>
-        <motion.div animate="visible" initial="hidden" variants={groupVariants}>
-          <motion.div className="text-report-base" variants={itemVariants}>
+        <motion.div animate="visible" className="mx-0 text-report-base" initial="hidden" variants={groupVariants}>
+          <motion.div variants={itemVariants}>
             <p>这一年</p>
             <p>在 {Object.keys(ballColorMap).length} 种大球颜色中</p>
           </motion.div>
-          <motion.p className="text-report-base" variants={itemVariants}>
+          <motion.p variants={itemVariants}>
             你收集了 <NumberTicker className="text-report-lg" value={data.listenedBallColorList.length} /> 种
             {data.listenedBallColorList.length === Object.keys(ballColorMap).length && <span>，掌声鼓励</span>}
           </motion.p>
-          <motion.div>
-            <ListenedBallGroup listenedBallColorAmountMap={data.listenedBallColorAmountMap} />
-          </motion.div>
         </motion.div>
+        <div>
+          <ListenedBallGroup listenedBallColorAmountMap={data.listenedBallColorAmountMap} />
+        </div>
       </div>
     </div>
   )

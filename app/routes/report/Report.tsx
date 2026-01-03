@@ -1,6 +1,8 @@
+import Fade from 'embla-carousel-fade'
 import { useAtomValue } from 'jotai'
 import { Home } from 'lucide-react'
 import { Activity, useEffect, useState } from 'react'
+import { Freeze } from 'react-freeze'
 import { useNavigate } from 'react-router'
 import AttendedStat from '~/components/reports/AttendedStat'
 import AttendedStat2 from '~/components/reports/AttendedStat2'
@@ -22,6 +24,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '~/components/ui/carousel'
+import { CurrentInViewContext } from '~/lib/context'
 import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom } from '~/stores/app'
 import Ending from './Ending'
 
@@ -79,30 +82,31 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <Carousel className="flex h-full w-full flex-col" opts={{ watchDrag: false }} setApi={setApi}>
+      <Carousel className="flex h-full w-full flex-col" opts={{ watchDrag: false }} plugins={[Fade()]} setApi={setApi}>
         <CarouselContent className="h-full">
           {Object.entries(slides)
             .filter(([_, Slide]) => !!Slide)
             .map(([key, SlideComponent], index) => (
               <CarouselItem className="h-full select-none border-x-[0.5px]" key={key}>
-                {/* 当前页、前一页保持活跃状态 */}
-                <Activity mode={index + 1 === currentIndex || index + 1 === currentIndex - 1 ? 'visible' : 'hidden'}>
-                  {SlideComponent ? <SlideComponent /> : null}
-                </Activity>
+                <CurrentInViewContext.Provider value={{ inView: index + 1 === currentIndex }}>
+                  {/* 当前页、前一页保持活跃状态 */}
+                  <Activity mode={index + 1 === currentIndex || index + 1 === currentIndex - 1 ? 'visible' : 'hidden'}>
+                    {SlideComponent ? (
+                      <Freeze freeze={!(index + 1 === currentIndex || index + 1 === currentIndex - 1)}>
+                        <SlideComponent />
+                      </Freeze>
+                    ) : null}
+                  </Activity>
+                </CurrentInViewContext.Provider>
               </CarouselItem>
             ))}
         </CarouselContent>
-        <footer className="flex h-16 shrink-0 select-none items-center gap-2 border-t px-6">
+        <footer className="flex h-16 shrink-0 select-none items-center gap-2 border-t bg-background/40 px-6 backdrop-blur-lg">
           <div className="flex-1 text-muted-foreground/50 text-xs">
             <p>{username ? `${username} 的` : '我的'} 5525+1 年度报告</p>
             <p className="opacity-50">replay.mayday.land</p>
           </div>
-          {currentIndex + 1 === pageCount ? (
-            <>
-              <CarouselPrevious className="translate-0 relative top-0 left-0" size="icon-lg" />
-              <CarouselNext className="translate-0 relative top-0 left-0" size="icon-lg" />
-            </>
-          ) : (
+          {currentIndex === pageCount ? (
             <Button
               className="rounded-full bg-transparent! text-white/50"
               onClick={() => navigate('/')}
@@ -112,6 +116,11 @@ const Report: React.FC<{ username: string }> = ({ username }) => {
               <Home strokeWidth={1} />
               返回首页
             </Button>
+          ) : (
+            <>
+              <CarouselPrevious className="translate-0 relative top-0 left-0" size="icon-lg" />
+              <CarouselNext className="translate-0 relative top-0 left-0" size="icon-lg" />
+            </>
           )}
         </footer>
       </Carousel>
