@@ -1,39 +1,13 @@
 import { useAtomValue } from 'jotai'
 import { motion } from 'motion/react'
 import { memo, useMemo } from 'react'
-// import Accusefive from '~/assets/guest/accusefive.webp'
-// import Cheer from '~/assets/guest/cheer.webp'
-// import Della from '~/assets/guest/della.webp'
-// import Ella from '~/assets/guest/ella.webp'
-// import Energy from '~/assets/guest/energy.webp'
-// import Jam from '~/assets/guest/jam.webp'
-// import Jjlin from '~/assets/guest/jjlin.webp'
-// import Michael from '~/assets/guest/michael.webp'
-// import Rene from '~/assets/guest/rene.webp'
-// import Richie from '~/assets/guest/richie.webp'
-// import Xin from '~/assets/guest/xin.webp'
 import { NumberTicker } from '~/components/ui/number-ticker'
-// import { InfiniteSlider } from '~/components/ui/infinite-slider'
 import type { Concert } from '~/data/types'
 import { useReportBackground } from '~/hooks/useReportBackground'
 import { groupVariants, itemVariants } from '~/lib/animated'
 import { concertListMap } from '~/lib/data'
 import { getConcertTitleByDate } from '~/lib/format'
 import { selectedConcertDetailsAtom } from '~/stores/app'
-
-// const guestImgMap = {
-//   告五人: Accusefive,
-//   陳綺貞: Cheer,
-//   丁噹: Della,
-//   陳嘉樺: Ella,
-//   Energy,
-//   蕭敬騰: Jam,
-//   林俊傑: Jjlin,
-//   光良: Michael,
-//   劉若英: Rene,
-//   任賢齊: Richie,
-//   劉雨昕: Xin,
-// }
 
 export const getPageData = (options: { selectedConcertDetails: Concert[] }) => {
   const { selectedConcertDetails } = options
@@ -75,7 +49,7 @@ const GuestStat = () => {
   const selectedConcertDetails = useAtomValue(selectedConcertDetailsAtom)
   const data = useMemo(() => getPageData({ selectedConcertDetails }), [selectedConcertDetails])
   console.log('GuestStat', data)
-  useReportBackground(null)
+  useReportBackground('guest-photo')
 
   return (
     <div className="relative h-full space-y-4 overflow-y-auto p-6">

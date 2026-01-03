@@ -257,6 +257,21 @@ body {
   .animate-flicker {
     animation: flicker 3s ease-in-out infinite;
   }
+
+  @keyframes slow-scroll {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+  .animate-slow-scroll {
+    animation: slow-scroll 60s linear infinite;
+  }
+  .animate-slow-scroll-reverse {
+    animation: slow-scroll 80s linear infinite reverse;
+  }
 }
 
 @property --top-mask-height {

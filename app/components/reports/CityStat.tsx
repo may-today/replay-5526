@@ -74,7 +74,8 @@ const CityStat: React.FC = () => {
 
   return (
     <div className="relative h-full w-full overflow-hidden py-4">
-      <div className="absolute right-0 bottom-0 left-0 px-6 py-6">
+      <div className="absolute inset-0 z-0" />
+      <div className="absolute right-0 bottom-0 left-0 z-10 px-6 py-6">
         <motion.div animate="visible" className="space-y-1 text-report-base" initial="hidden" variants={groupVariants}>
           <motion.p className="text-report-base opacity-50!" variants={itemVariants}>
             这一年，你走过 <NumberTicker value={data.allListenedCityList.length} /> 座城市

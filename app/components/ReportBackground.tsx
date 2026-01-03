@@ -3,18 +3,25 @@ import { useAtomValue } from 'jotai'
 import { motion } from 'motion/react'
 import { useMemo } from 'react'
 import { ballColorMap } from '~/data/ballColor'
-import { selectedConcertDateTypeMapAtom, selectedReportBackgroundAtom } from '~/stores/app'
+import { selectedConcertDateTypeMapAtom, selectedConcertDetailsAtom, selectedReportBackgroundAtom } from '~/stores/app'
 import NoiseBackground from './NoiseBackground'
+import PhotoGridBackground from './PhotoGridBackground'
 import { getPageData as getEncoreBallStatData } from './reports/EncoreBallStat'
+import { getPageData as getGuestStatData } from './reports/GuestStat'
 import AuroraFlowShader from './ui/aurora-flow-shader'
 import { StarsCanvas } from './ui/stars-canvas'
 
 const ReportBackground: React.FC = () => {
   const selectedReportBackground = useAtomValue(selectedReportBackgroundAtom)
+  const selectedConcertDetails = useAtomValue(selectedConcertDetailsAtom)
   const selectedConcertDateTypeMap = useAtomValue(selectedConcertDateTypeMapAtom)
   const listenedBallColorList = useMemo(
     () => getEncoreBallStatData({ selectedConcertDateTypeMap }).listenedBallColorList,
     [selectedConcertDateTypeMap]
+  )
+  const allListenedGuestList = useMemo(
+    () => getGuestStatData({ selectedConcertDetails }).allListenedGuestList,
+    [selectedConcertDetails]
   )
 
   return (
@@ -70,6 +77,15 @@ const ReportBackground: React.FC = () => {
             playsInline
             src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/rain.mp4`}
           />
+        </motion.div>
+      )}
+      {selectedReportBackground.type === 'guest-photo' && (
+        <motion.div
+          animate={{ opacity: selectedReportBackground.opacity, transition: { duration: 2 } }}
+          className="h-full w-full"
+          initial={{ opacity: 0 }}
+        >
+          <PhotoGridBackground highlightList={allListenedGuestList} />
         </motion.div>
       )}
       <NoiseBackground opacity={0.03} />
