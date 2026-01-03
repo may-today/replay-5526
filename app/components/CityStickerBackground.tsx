@@ -75,8 +75,6 @@ const CityStickerBackground: React.FC<{ cityList: string[] }> = ({ cityList }) =
     }
 
     updatePositions()
-    window.addEventListener('resize', updatePositions)
-    return () => window.removeEventListener('resize', updatePositions)
   }, [cityStickerList])
 
   return (

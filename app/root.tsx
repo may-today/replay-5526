@@ -1,4 +1,5 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { Toaster } from '~/components/ui/sonner'
 import { TextureOverlay } from '~/components/ui/texture-overlay'
 
 import type { Route } from './+types/root'
@@ -30,6 +31,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <ScrollRestoration />
         <Scripts />
+        <Toaster />
       </body>
     </html>
   )

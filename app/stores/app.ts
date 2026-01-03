@@ -7,7 +7,13 @@ import { concertListMap } from '~/lib/data'
 
 export const usernameAtom = atomWithStorage<string>('replay:username', '')
 export const selectedProvinceAtom = atomWithStorage<string>('replay:selectedProvince', 'none')
+/** 来自用户的精确定位，优先级高于 selectedProvinceAtom */
+export const customLocationAtom = atom<[number, number] | null>(null)
 export const selectedCoordAtom = atom<[number, number] | null>((get) => {
+  const customLocation = get(customLocationAtom)
+  if (customLocation) {
+    return customLocation
+  }
   const province = get(selectedProvinceAtom)
   return geoCoordMap[province] || null
 })
