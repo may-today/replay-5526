@@ -17,6 +17,14 @@ export default function LoadingPage() {
     }
   }, [location, navigate])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/report', { replace: true, viewTransition: true })
+    }, 15_000)
+
+    return () => clearTimeout(timer)
+  }, [navigate])
+
   const handleGoToReport = () => {
     navigate('/report', { replace: true, viewTransition: true })
   }
