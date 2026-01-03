@@ -75,7 +75,7 @@ const Printer: React.FC<{ onPrintStart?: () => void }> = ({ onPrintStart }) => {
   return (
     <div className="relative flex w-full max-w-[600px] flex-col">
       {/* The Printer Machine Body */}
-      <div className="relative z-20 rounded-2xl border-neutral-700 border-b-6 bg-neutral-800 p-4 shadow-2xl">
+      <div className="relative z-20 rounded-2xl border-gray-700 border-b-6 bg-gray-800 p-4 shadow-2xl">
         {/* Internal Paper Slot (Now lowered into the body) */}
         <div className="absolute top-6 left-1/2 w-[90%] -translate-x-1/2">
           <div className="relative">
@@ -125,8 +125,8 @@ const Printer: React.FC<{ onPrintStart?: () => void }> = ({ onPrintStart }) => {
           <motion.button
             className={clsx([
               'flex items-center justify-center gap-1',
-              'w-full rounded-xl border border-white/50 py-2 font-semibold opacity-100 shadow-lg transition-opacity',
-              'bg-white text-black disabled:opacity-50',
+              'w-full rounded-xl py-2 font-semibold opacity-100 shadow-lg transition-opacity',
+              'bg-primary text-black disabled:opacity-50',
             ])}
             disabled={isDisabled}
             onClick={isFinished ? handleSaveImage : handleStartPrint}

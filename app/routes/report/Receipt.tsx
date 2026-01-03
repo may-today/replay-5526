@@ -8,7 +8,7 @@ import { getPageData as getGuestStatData } from '~/components/reports/GuestStat'
 import { getPageData as getRandomSongStat3Data } from '~/components/reports/RandomSongStat3'
 import { ballColorMap } from '~/data/ballColor'
 import type { Concert, ConcertSelectType } from '~/data/types'
-import { cityPlaceMap } from '~/lib/data'
+import { cityImgIdMap, cityPlaceMap } from '~/lib/data'
 import { getConcertTitleByDate, removeYearFromDate } from '~/lib/format'
 import {
   selectedConcertDateTypeMapAtom,
@@ -163,13 +163,7 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
         </div>
 
         {/* City Stamp Area */}
-        {data.allListenedCityList.length > 0 && (
-          <div className="h-32 bg-black/5">
-            <div className="flex items-center justify-between gap-4">
-              观演城市:{data.allListenedCityList.join('、')}
-            </div>
-          </div>
-        )}
+        {data.allListenedCityList.length > 0 && <CityStampArea cityList={data.allListenedCityList} />}
 
         {/* Footer */}
         {/* <div className="border-black border-t" /> */}
@@ -180,6 +174,47 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
 
       {/* Bottom Jagged Edge */}
       <div className="zigzag-border-bottom h-2 w-full" />
+    </div>
+  )
+}
+
+const CityStampArea: React.FC<{ cityList: string[] }> = ({ cityList }) => {
+  // 为每个城市生成固定的随机角度（基于城市名）
+  const getRotation = (city: string, index: number) => {
+    // 使用城市名和索引生成一个简单的伪随机数，确保每次渲染角度一致
+    const hash = city.split('').reduce((acc, char) => acc + char.charCodeAt(0), index * 100)
+    return (hash % 30) - 15 // 返回 -15 到 15 度之间的角度
+  }
+
+  // 生成随机的水平和垂直位移
+  const getTranslate = (city: string, index: number) => {
+    const hash1 = city.split('').reduce((acc, char) => acc + char.charCodeAt(0), index * 173)
+    const hash2 = city.split('').reduce((acc, char) => acc + char.charCodeAt(0) * 2, index * 239)
+    const x = (hash1 % 20) - 10
+    const y = (hash2 % 10) - 5
+    return { x, y }
+  }
+
+  return (
+    <div className="h-36">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        {cityList.map((city, index) => {
+          const translate = getTranslate(city, index)
+          return (
+            <img
+              alt={city}
+              className="w-1/4 object-contain transition-transform duration-300 hover:z-10 hover:scale-110"
+              key={city}
+              src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/stadim-monochrome/${cityImgIdMap[city]}.webp`}
+              style={{
+                transform: `translate(${translate.x}px, ${translate.y}px) rotate(${getRotation(city, index)}deg)`,
+                marginLeft: index > 0 ? '-16px' : '0',
+              }}
+              width={120}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

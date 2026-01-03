@@ -11,7 +11,7 @@ import CityStickerBackground from '../CityStickerBackground'
 
 const allCityAmountMap = Object.values(concertListMap).reduce(
   (acc, concert) => {
-    acc[concert.city] = (acc[concert.city] || 0) + 1
+    acc[concert.city.split('-')[0]] = (acc[concert.city.split('-')[0]] || 0) + 1
     return acc
   },
   {} as Record<string, number>
@@ -28,7 +28,6 @@ const allCityCoordMap = {
   台北: [121.33, 25.02],
   北京: [116.36, 39.92],
   上海: [121.48, 31.22],
-  '上海-2': [121.48, 31.22],
   贵阳: [106.42, 26.34],
   长沙: [112.58, 28.11],
   郑州: [113.38, 34.45],
@@ -40,7 +39,7 @@ export const getPageData = (options: { selectedConcertDetails: Concert[]; select
   const { selectedConcertDetails, selectedCoord } = options
   const allListenedAmountMap = selectedConcertDetails.reduce(
     (acc, concert) => {
-      acc[concert.city] = (acc[concert.city] || 0) + 1
+      acc[concert.city.split('-')[0]] = (acc[concert.city.split('-')[0]] || 0) + 1
       return acc
     },
     {} as Record<string, number>

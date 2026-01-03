@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useState } from 'react'
+import { cityImgIdMap } from '~/lib/data'
 
 interface StickerData {
   id: string
@@ -32,26 +33,6 @@ const generateRandomPosition = (index: number, containerWidth: number, container
     y: Math.max(-margin, randomY * maxY),
   }
 }
-
-const cityImgIdMap = {
-  桃园: 'taoyuan',
-  新加坡: 'singapore',
-  悉尼: 'sydney',
-  拉斯维加斯: 'lasvegas',
-  天津: 'tianjin',
-  香港: 'hongkong',
-  杭州: 'hangzhou',
-  哈尔滨: 'harbin',
-  台北: 'taipei',
-  北京: 'beijing',
-  上海: 'shanghai',
-  贵阳: 'guiyang',
-  长沙: 'changsha',
-  郑州: 'zhengzhou',
-  厦门: 'xiamen',
-  广州: 'guangzhou',
-  台中: 'taichung',
-} as Record<string, string>
 
 const CityStickerBackground: React.FC<{ cityList: string[] }> = ({ cityList }) => {
   const [stickersWithPositions, setStickersWithPositions] = useState<StickerData[]>([])
