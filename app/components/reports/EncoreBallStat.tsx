@@ -51,7 +51,7 @@ const EncoreBallStat: React.FC = () => {
     if (inView) {
       setTimeout(() => {
         triggerReportBackground('ball', 0.8)
-      }, 1500)
+      }, 1200)
     }
   }, [inView, triggerReportBackground])
 

@@ -54,7 +54,7 @@ const RainStat: React.FC = () => {
     [selectedConcertDetails, selectedConcertDateTypeMap]
   )
   console.log('RainStat', data)
-  useReportBackground(null)
+  useReportBackground('rain')
 
   return (
     <div className="relative h-full p-4">

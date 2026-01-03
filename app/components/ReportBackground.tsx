@@ -56,6 +56,22 @@ const ReportBackground: React.FC = () => {
           <AuroraFlowShader amplitude={0.5} className="h-full w-full" frequency={5} />
         </motion.div>
       )}
+      {selectedReportBackground.type === 'rain' && (
+        <motion.div
+          animate={{ opacity: selectedReportBackground.opacity, transition: { duration: 2 } }}
+          className="h-full w-full"
+          initial={{ opacity: 0 }}
+        >
+          <video
+            autoPlay
+            className="mask-t-from-40% h-full w-full object-cover opacity-50"
+            loop
+            muted
+            playsInline
+            src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/rain.mp4`}
+          />
+        </motion.div>
+      )}
       <NoiseBackground opacity={0.03} />
     </div>
   )
