@@ -136,7 +136,7 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
           </div>
           <div>年度之最:《{data.selectedTopRandomSongList[selectTopSongIndex]}》</div>
           {data.selectedNicheRandomSongList.length > 0 && (
-            <div>年度最小众:{data.selectedNicheRandomSongList.map((song) => `《${song}》`).join('、')}</div>
+            <div>年度最小众:{data.selectedNicheRandomSongList.map((song) => `《${song}》`).join('')}</div>
           )}
           {data.allListenedGuestList.length > 0 && <div>嘉宾:{data.allListenedGuestList.join('、')}</div>}
         </div>
