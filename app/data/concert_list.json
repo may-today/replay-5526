@@ -1535,5 +1535,30 @@
     "encoreSongList": ["私奔到月球", "羅密歐與茱麗葉", "溫柔", "知足", "頑固"],
     "endingSong": "頑固",
     "ballColorList": ["white"]
+  },
+  {
+    "date": "2026.01.04",
+    "city": "台中",
+    "cityIndex": 6,
+    "last": true,
+    "type": "5526",
+    "guest": "",
+    "start": 1832,
+    "end": 2204,
+    "songAmount": 43,
+    "requestSongList": ["心中無別人", "黑白講", "晚安地球人", "天使", "純真"],
+    "guestSongList": [],
+    "specialSongList": [],
+    "encoreSongList": [
+      "雌雄同體",
+      "候鳥",
+      "I Love You無望",
+      "後青春期的詩",
+      "如果我們不曾相遇",
+      "出頭天",
+      "志明與春嬌"
+    ],
+    "endingSong": "志明與春嬌",
+    "ballColorList": ["orange"]
   }
 ]

@@ -178,6 +178,15 @@ export const specialEventList: [string[], SpecialEvent][] = [
     },
   ],
   [
+    ['2025.07.11'],
+    {
+      title: '倔强周思齐',
+      noteId: '687113f4000000001c0355ca',
+      noteDesc: '五月天+周董周思齐！',
+      noteAuthor: '夜Iaz',
+    },
+  ],
+  [
     ['2025.07.12'],
     {
       title: 'F4 合体',
