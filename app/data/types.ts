@@ -21,6 +21,8 @@ export interface Concert {
   requestSongList: string[]
   /** 嘉宾歌曲列表 */
   guestSongList: string[]
+  /** 嘉宾演唱的、五月天非固定歌单歌曲 */
+  guestRandomSongList?: string[]
   /** 非五月天歌曲列表 */
   specialSongList: string[]
   /** 安可歌曲列表 */

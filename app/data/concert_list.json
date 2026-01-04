@@ -241,6 +241,7 @@
     "end": 2300,
     "songAmount": 44,
     "requestSongList": ["噢買尬", "Do You Ever Shine？", "你的神曲", "好不好"],
+    "guestRandomSongList": ["步步"],
     "guestSongList": ["任性", "步步"],
     "specialSongList": [],
     "encoreSongList": ["玫瑰少年", "洋蔥"],
@@ -562,6 +563,7 @@
       "為你寫下這首情歌",
       "有你的將來"
     ],
+    "guestRandomSongList": ["溫柔"],
     "guestSongList": ["給你一瓶魔法藥水", "溫柔", "你是我的眼"],
     "specialSongList": ["給你一瓶魔法藥水", "你是我的眼"],
     "encoreSongList": ["玫瑰少年", "透露", "諾亞方舟", "勇敢", "出頭天"],
@@ -606,6 +608,7 @@
     "end": 2206,
     "songAmount": 46,
     "requestSongList": ["2012", "忘詞", "雨眠", "闖"],
+    "guestRandomSongList": ["志明與春嬌"],
     "guestSongList": ["志明與春嬌", "如果可以"],
     "specialSongList": ["如果可以"],
     "encoreSongList": [
@@ -633,6 +636,7 @@
       "愛情的模樣",
       "八月愛人"
     ],
+    "guestRandomSongList": ["心中無別人"],
     "guestSongList": ["周思齊應援曲", "心中無別人"],
     "specialSongList": ["周思齊應援曲"],
     "encoreSongList": [
@@ -765,6 +769,7 @@
       "終於結束的起點",
       "嘿我要走了"
     ],
+    "guestRandomSongList": ["超人", "如果我們不曾相遇", "天使"],
     "guestSongList": [
       "任性",
       "像晴天像雨天",
@@ -925,6 +930,7 @@
     "end": 2146,
     "songAmount": 46,
     "requestSongList": ["有你的將來", "哄我入睡", "寵上天", "T1213121"],
+    "guestRandomSongList": ["春天的吶喊"],
     "guestSongList": ["我愛夏天", "春天的吶喊", "戀愛ING"],
     "specialSongList": ["我愛夏天"],
     "encoreSongList": [
@@ -946,6 +952,7 @@
     "end": 2148,
     "songAmount": 45,
     "requestSongList": ["洗衣機", "純真", "命運", "小太陽"],
+    "guestRandomSongList": ["香水"],
     "guestSongList": ["香水", "女孩"],
     "specialSongList": ["命運", "女孩"],
     "encoreSongList": ["私奔到月球", "愛情萬歲", "羅密歐與茱麗葉", "溫柔"],
@@ -962,6 +969,7 @@
     "end": 2146,
     "songAmount": 46,
     "requestSongList": ["叫我第一名", "擁抱", "洗衣機", "雨眠"],
+    "guestRandomSongList": ["私奔到月球"],
     "guestSongList": ["私奔到月球", "小半"],
     "specialSongList": ["小半"],
     "encoreSongList": ["愛情萬歲", "透露", "你是唯一", "頑固", "後青春期的詩"],
@@ -1259,6 +1267,7 @@
     "end": 2154,
     "songAmount": 43,
     "requestSongList": ["出頭天", "抓狂", "私奔到月球"],
+    "guestRandomSongList": ["玫瑰少年"],
     "guestSongList": ["朋友而已", "玫瑰少年"],
     "specialSongList": ["朋友而已"],
     "encoreSongList": ["雌雄同體", "頑固", "聽不到"],
@@ -1297,6 +1306,7 @@
     "end": 2151,
     "songAmount": 44,
     "requestSongList": ["牙關", "I Love You無望", "我們", "嘿我要走了"],
+    "guestRandomSongList": ["後來的我們"],
     "guestSongList": ["後來的我們", "Radio"],
     "specialSongList": ["Radio"],
     "encoreSongList": ["你是唯一", "一顆蘋果", "讓我照顧你"],
@@ -1503,6 +1513,7 @@
     "end": 2201,
     "songAmount": 43,
     "requestSongList": ["將軍令", "青空未來", "麥來亂", "好好", "墓仔埔也敢去"],
+    "guestRandomSongList": ["超人"],
     "guestSongList": ["超人", "我不願讓你一個人", "朋友而已"],
     "specialSongList": ["墓仔埔也敢去", "朋友而已"],
     "encoreSongList": ["香水", "倉頡", "後來的我們", "志明與春嬌"],

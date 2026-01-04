@@ -16,10 +16,19 @@ const getPageData = (options: { selectedConcertDateTypeMap: Record<string, Conce
   /** 按场次统计的随机歌曲列表 */
   const randomSongListDict: Record<string, string[]> = Object.values(concertListMap).reduce(
     (acc, concert) => {
-      // 嘉宾曲目（需要和 specialSongList 做交集，因为嘉宾会唱五月天的歌）
-      // const guestSpecialSongList = concert.guestSongList.filter((song) => concert.specialSongList.includes(song))
+      // 嘉宾曲目（需要和 specialSongList 做交集，因为嘉宾会唱五月天的歌，只统计个人曲目）
+      const guestSpecialSongList = concert.guestSongList.filter((song) => concert.specialSongList.includes(song))
+      // 嘉宾演唱的五月天非固定歌单随机曲目
+      const guestRandomSongList = concert.guestRandomSongList || []
       // 和点歌、安可合并后去重
-      const songList = Array.from(new Set([...concert.requestSongList, ...concert.encoreSongList]))
+      const songList = Array.from(
+        new Set([
+          ...guestSpecialSongList,
+          ...guestRandomSongList,
+          ...concert.requestSongList,
+          ...concert.encoreSongList,
+        ])
+      )
       acc[concert.date] = songList
       return acc
     },
@@ -48,9 +57,8 @@ const getPageData = (options: { selectedConcertDateTypeMap: Record<string, Conce
    * 5525/5526 公共固定歌曲 开场部分 5 + 点歌前部分 3 + 点歌后部分 10
    * 5525 固定歌曲 19
    * 5526 固定歌曲 18
-   * 嘉宾歌曲 26
    */
-  const totalSongAmount = 55 + 26 + totalRandomSongAmount
+  const totalSongAmount = 55 + totalRandomSongAmount
 
   /** 个人选择的场次 */
   const selectedDates = Object.keys(selectedConcertDateTypeMap)

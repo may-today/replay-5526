@@ -19,8 +19,10 @@ export const getPageData = (options: { selectedConcertDateTypeMap: Record<string
   /** 按场次统计的随机歌曲列表 */
   const randomSongListDict: Record<string, string[]> = Object.values(concertListMap).reduce(
     (acc, concert) => {
-      // 点歌、安可合并后去重
-      const songList = Array.from(new Set([...concert.requestSongList, ...concert.encoreSongList]))
+      // 点歌、安可、嘉宾五月天非固定歌单随机曲目合并后去重
+      const songList = Array.from(
+        new Set([...concert.requestSongList, ...concert.encoreSongList, ...(concert.guestRandomSongList || [])])
+      )
       acc[concert.date] = songList
       return acc
     },
