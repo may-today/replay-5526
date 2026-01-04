@@ -48,7 +48,7 @@ export function SlideToUnlock({ className, handleWidth = 56, children, onUnlock,
     const trackWidth = trackRef.current?.offsetWidth || 0
     const maxX = trackWidth - handleWidth
 
-    if (x.get() >= maxX) {
+    if (x.get() >= maxX * 0.8) {
       onUnlock?.()
     } else {
       animate(x, 0, { type: 'spring', bounce: 0, duration: 0.25 })
