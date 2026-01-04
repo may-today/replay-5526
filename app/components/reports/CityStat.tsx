@@ -33,6 +33,7 @@ const allCityCoordMap = {
   郑州: [113.38, 34.45],
   厦门: [118.1, 24.46],
   广州: [113.23, 23.16],
+  台中: [120.4, 24.08],
 } as Record<string, [number, number]>
 
 export const getPageData = (options: { selectedConcertDetails: Concert[]; selectedCoord: [number, number] | null }) => {
