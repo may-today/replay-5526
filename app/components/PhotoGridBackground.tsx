@@ -17,6 +17,7 @@ const guestImgIdMap = {
   陈粒: 'cl',
   宋雨琦: 'syq',
   汪苏泷: 'wsl',
+  丁当: 'dd',
 } as Record<string, string>
 const guestImgIds = Object.values(guestImgIdMap)
 

@@ -47,10 +47,10 @@ const getPageData = (options: { selectedConcertDateTypeMap: Record<string, Conce
    * 总歌曲数量，计算方式为固定歌单（固定+一安）+ 总随机歌曲数量（去重）
    * 5525/5526 公共固定歌曲 开场部分 5 + 点歌前部分 3 + 点歌后部分 10
    * 5525 固定歌曲 19
-   * 5526 固定歌曲 17
+   * 5526 固定歌曲 18
    * 嘉宾歌曲 26
    */
-  const totalSongAmount = 54 + 26 + totalRandomSongAmount
+  const totalSongAmount = 55 + 26 + totalRandomSongAmount
 
   /** 个人选择的场次 */
   const selectedDates = Object.keys(selectedConcertDateTypeMap)

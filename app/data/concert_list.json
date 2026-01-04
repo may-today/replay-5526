@@ -1407,5 +1407,122 @@
     "encoreSongList": ["候鳥", "後青春期的詩", "讓我照顧你"],
     "endingSong": "讓我照顧你",
     "ballColorList": ["emerald", "orange"]
+  },
+  {
+    "date": "2025.12.27",
+    "city": "台中",
+    "cityIndex": 1,
+    "type": "5526",
+    "guest": "",
+    "start": 1830,
+    "end": 2151,
+    "songAmount": 42,
+    "requestSongList": [
+      "步步",
+      "好好",
+      "候鳥",
+      "寵上天",
+      "出頭天",
+      "起來",
+      "勇敢"
+    ],
+    "guestSongList": [],
+    "specialSongList": ["起來"],
+    "encoreSongList": ["夜訪吸血鬼", "聽不到", "憨人", "心中無別人"],
+    "endingSong": "心中無別人",
+    "ballColorList": ["yellow"]
+  },
+  {
+    "date": "2025.12.28",
+    "city": "台中",
+    "cityIndex": 2,
+    "type": "5526",
+    "guest": "丁当",
+    "start": 1834,
+    "end": 2201,
+    "songAmount": 46,
+    "requestSongList": [
+      "入陣曲",
+      "你是唯一",
+      "愛人啊",
+      "垃圾車",
+      "小護士",
+      "雨眠"
+    ],
+    "guestSongList": [
+      "青蘋果樂園",
+      "對你愛不完",
+      "射手",
+      "星期五晚上",
+      "派對動物",
+      "離開地球表面",
+      "愛的主打歌"
+    ],
+    "specialSongList": [
+      "青蘋果樂園",
+      "對你愛不完",
+      "射手",
+      "星期五晚上",
+      "愛的主打歌",
+      "愛人啊"
+    ],
+    "encoreSongList": ["私奔到月球", "玫瑰少年", "忘詞", "洋蔥", "憨人"],
+    "endingSong": "憨人",
+    "ballColorList": ["rose"]
+  },
+  {
+    "date": "2025.12.31",
+    "city": "台中",
+    "cityIndex": 3,
+    "type": "5526",
+    "guest": "",
+    "start": 2128,
+    "end": 2444,
+    "songAmount": 41,
+    "requestSongList": ["牙關", "小時候", "月亮代表我的心", "開天窗"],
+    "guestSongList": [],
+    "specialSongList": ["月亮代表我的心"],
+    "encoreSongList": [
+      "你是唯一",
+      "步步",
+      "頑固",
+      "心中無別人",
+      "一顆蘋果",
+      "如果我們不曾相遇"
+    ],
+    "endingSong": "如果我們不曾相遇",
+    "ballColorList": ["red", "sky"]
+  },
+  {
+    "date": "2026.01.01",
+    "city": "台中",
+    "cityIndex": 4,
+    "type": "5526",
+    "guest": "小玫瑰",
+    "start": 1830,
+    "end": 2201,
+    "songAmount": 43,
+    "requestSongList": ["將軍令", "青空未來", "麥來亂", "好好", "墓仔埔也敢去"],
+    "guestSongList": ["超人", "我不願讓你一個人", "朋友而已"],
+    "specialSongList": ["墓仔埔也敢去", "朋友而已"],
+    "encoreSongList": ["香水", "倉頡", "後來的我們", "志明與春嬌"],
+    "endingSong": "志明與春嬌",
+    "ballColorList": ["pink"]
+  },
+  {
+    "date": "2026.01.03",
+    "city": "台中",
+    "cityIndex": 5,
+    "type": "5526",
+    "guest": "",
+    "start": 1830,
+    "end": 2152,
+    "songAmount": 40,
+    "requestSongList": ["這個世界", "輕功", "米老鼠", "純真", "明白"],
+    "guestSongList": [],
+    "specialSongList": ["這個世界"],
+    "encoreSongList": ["私奔到月球", "羅密歐與茱麗葉", "溫柔", "知足", "頑固"],
+    "endingSong": "頑固",
+    "ballColorList": ["white"]
   }
 ]
