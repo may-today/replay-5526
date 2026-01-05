@@ -537,7 +537,6 @@
     "guestSongList": ["星期五晚上", "馬上去", "任性"],
     "specialSongList": ["天天想你", "星期五晚上", "馬上去", "任性"],
     "encoreSongList": [
-      "愛情萬歲",
       "擁抱",
       "洋蔥",
       "軋車",
@@ -589,7 +588,6 @@
     "specialSongList": ["命運", "星期五晚上"],
     "encoreSongList": [
       "夜訪吸血鬼",
-      "愛情萬歲",
       "第二人生",
       "聽不到",
       "心中無別人",
@@ -639,13 +637,7 @@
     "guestRandomSongList": ["心中無別人"],
     "guestSongList": ["周思齊應援曲", "心中無別人"],
     "specialSongList": ["周思齊應援曲"],
-    "encoreSongList": [
-      "愛情萬歲",
-      "如煙",
-      "如果我們不曾相遇",
-      "永遠的永遠",
-      "玫瑰少年"
-    ],
+    "encoreSongList": ["如煙", "如果我們不曾相遇", "永遠的永遠", "玫瑰少年"],
     "endingSong": "玫瑰少年",
     "ballColorList": ["emerald"]
   },
@@ -692,7 +684,7 @@
     ],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["頑固", "羅密歐與茱麗葉", "愛情萬歲", "彩虹"],
+    "encoreSongList": ["頑固", "羅密歐與茱麗葉", "彩虹"],
     "endingSong": "彩虹",
     "ballColorList": ["pink"]
   },
@@ -729,7 +721,7 @@
     "requestSongList": ["我們", "我", "晚安地球人", "夜訪吸血鬼"],
     "guestSongList": ["流星雨", "笑忘歌"],
     "specialSongList": ["流星雨"],
-    "encoreSongList": ["香水", "愛情萬歲", "聽不到", "好好"],
+    "encoreSongList": ["香水", "聽不到", "好好"],
     "endingSong": "好好",
     "ballColorList": ["yellow"]
   },
@@ -779,7 +771,7 @@
       "天使"
     ],
     "specialSongList": ["命運", "像晴天像雨天"],
-    "encoreSongList": ["愛情萬歲", "透露", "第二人生", "如果我們不曾相遇"],
+    "encoreSongList": ["透露", "第二人生", "如果我們不曾相遇"],
     "endingSong": "如果我們不曾相遇",
     "ballColorList": ["emerald"]
   },
@@ -826,13 +818,7 @@
     "requestSongList": ["好好", "花", "一半人生", "金色大街"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": [
-      "香水",
-      "愛情萬歲",
-      "你不是真正的快樂",
-      "洗衣機",
-      "頑固"
-    ],
+    "encoreSongList": ["香水", "你不是真正的快樂", "洗衣機", "頑固"],
     "endingSong": "頑固",
     "ballColorList": ["white"]
   },
@@ -863,7 +849,7 @@
     "requestSongList": ["候鳥", "一顆蘋果", "有你的將來", "噢買尬", "T1213121"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["愛情萬歲", "忘詞", "頑固", "洋蔥"],
+    "encoreSongList": ["忘詞", "頑固", "洋蔥"],
     "endingSong": "洋蔥",
     "ballColorList": ["rose"]
   },
@@ -894,7 +880,7 @@
     "requestSongList": ["I Love You無望", "開天窗", "燕尾蝶", "忘詞"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["香水", "愛情萬歲", "純真", "後來的我們"],
+    "encoreSongList": ["香水", "純真", "後來的我們"],
     "endingSong": "後來的我們",
     "ballColorList": ["rose"]
   },
@@ -933,13 +919,7 @@
     "guestRandomSongList": ["春天的吶喊"],
     "guestSongList": ["我愛夏天", "春天的吶喊", "戀愛ING"],
     "specialSongList": ["我愛夏天"],
-    "encoreSongList": [
-      "私奔到月球",
-      "愛情萬歲",
-      "最重要的小事",
-      "一顆蘋果",
-      "聽不到"
-    ],
+    "encoreSongList": ["私奔到月球", "最重要的小事", "一顆蘋果", "聽不到"],
     "endingSong": "聽不到",
     "ballColorList": ["red", "pink"]
   },
@@ -955,7 +935,7 @@
     "guestRandomSongList": ["香水"],
     "guestSongList": ["香水", "女孩"],
     "specialSongList": ["命運", "女孩"],
-    "encoreSongList": ["私奔到月球", "愛情萬歲", "羅密歐與茱麗葉", "溫柔"],
+    "encoreSongList": ["私奔到月球", "羅密歐與茱麗葉", "溫柔"],
     "endingSong": "溫柔",
     "ballColorList": ["rose"]
   },
@@ -972,7 +952,7 @@
     "guestRandomSongList": ["私奔到月球"],
     "guestSongList": ["私奔到月球", "小半"],
     "specialSongList": ["小半"],
-    "encoreSongList": ["愛情萬歲", "透露", "你是唯一", "頑固", "後青春期的詩"],
+    "encoreSongList": ["透露", "你是唯一", "頑固", "後青春期的詩"],
     "endingSong": "後青春期的詩",
     "ballColorList": ["sky", "emerald"]
   },
@@ -1003,7 +983,7 @@
     "requestSongList": ["心中無別人", "爆肝", "你是唯一", "青空未來"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["愛情萬歲", "倉頡", "聽不到", "為你寫下這首情歌"],
+    "encoreSongList": ["倉頡", "聽不到", "為你寫下這首情歌"],
     "endingSong": "為你寫下這首情歌",
     "ballColorList": ["rose"]
   },
@@ -1056,7 +1036,7 @@
     "requestSongList": ["命運", "我", "哄我入睡", "阿姆斯壯"],
     "guestSongList": [],
     "specialSongList": ["命運"],
-    "encoreSongList": ["愛情萬歲", "你是唯一", "一顆蘋果", "如果我們不曾相遇"],
+    "encoreSongList": ["你是唯一", "一顆蘋果", "如果我們不曾相遇"],
     "endingSong": "如果我們不曾相遇",
     "ballColorList": ["rose", "red"]
   },
@@ -1131,7 +1111,7 @@
     "requestSongList": ["什麼歌", "小護士", "錯錯錯", "你是唯一", "鹹魚"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["愛情萬歲", "雌雄同體", "後來的我們"],
+    "encoreSongList": ["雌雄同體", "後來的我們"],
     "endingSong": "後來的我們",
     "ballColorList": ["yellow"]
   },
@@ -1179,7 +1159,7 @@
     "requestSongList": ["你是唯一", "思慕的人", "無法度按奈", "小太陽"],
     "guestSongList": [],
     "specialSongList": ["無法度按奈"],
-    "encoreSongList": ["愛情萬歲", "麥來亂", "聽不到"],
+    "encoreSongList": ["麥來亂", "聽不到"],
     "endingSong": "聽不到",
     "ballColorList": ["rose"]
   },
@@ -1340,7 +1320,7 @@
     "requestSongList": ["小太陽", "好不好", "一半人生", "牙關", "有你的將來"],
     "guestSongList": [],
     "specialSongList": [],
-    "encoreSongList": ["愛情萬歲", "你是唯一", "一顆蘋果", "Happy birth.day"],
+    "encoreSongList": ["你是唯一", "一顆蘋果", "Happy birth.day"],
     "endingSong": "一顆蘋果",
     "ballColorList": ["pink", "grass"]
   },
@@ -1392,7 +1372,7 @@
     "requestSongList": ["忘詞", "牙關", "左鍵", "疼愛"],
     "guestSongList": [],
     "specialSongList": ["疼愛"],
-    "encoreSongList": ["愛情萬歲", "如煙", "私奔到月球"],
+    "encoreSongList": ["如煙", "私奔到月球"],
     "endingSong": "私奔到月球",
     "ballColorList": ["white"]
   },
@@ -1535,5 +1515,30 @@
     "encoreSongList": ["私奔到月球", "羅密歐與茱麗葉", "溫柔", "知足", "頑固"],
     "endingSong": "頑固",
     "ballColorList": ["white"]
+  },
+  {
+    "date": "2026.01.04",
+    "city": "台中",
+    "cityIndex": 6,
+    "last": true,
+    "type": "5526",
+    "guest": "",
+    "start": 1832,
+    "end": 2204,
+    "songAmount": 43,
+    "requestSongList": ["心中無別人", "黑白講", "晚安地球人", "天使", "純真"],
+    "guestSongList": [],
+    "specialSongList": [],
+    "encoreSongList": [
+      "雌雄同體",
+      "候鳥",
+      "I Love You無望",
+      "後青春期的詩",
+      "如果我們不曾相遇",
+      "出頭天",
+      "志明與春嬌"
+    ],
+    "endingSong": "志明與春嬌",
+    "ballColorList": ["orange"]
   }
 ]

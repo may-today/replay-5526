@@ -157,7 +157,7 @@ const RandomSongStat3: React.FC = () => {
                 {data.selectedNicheRandomSongList
                   .slice(0, 3)
                   .map((song) => `《${song}》`)
-                  .join('、')}
+                  .join('')}
                 {data.selectedNicheRandomSongList.length > 3 && `等${data.selectedNicheRandomSongList.length}首`}
               </p>
               <p className="mx-0 text-report-sm opacity-50!">今年只被唱过一次，恰好被幸运的你听见</p>

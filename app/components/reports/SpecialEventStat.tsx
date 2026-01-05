@@ -151,8 +151,8 @@ const SpecialEventItem: React.FC<{
             width={160}
           />
         </div>
-        <p className="z-10 flex-1 text-left text-2xl text-white/80">#{event.title}</p>
-        <div className="z-10 flex items-center gap-3">
+        <p className="z-10 w-full flex-1 text-left text-2xl text-white/80">#{event.title}</p>
+        <div className="z-10 flex w-full items-center gap-3">
           <p className="flex-1 truncate text-left text-sm text-white/40">{event.noteDesc}</p>
           <Play className="opacity-50" fill="#fff" size={16} />
         </div>
