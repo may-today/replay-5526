@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import receiptLogo from '~/assets/5525.png'
 import { getPageData as getAttendedStat2Data } from '~/components/reports/AttendedStat2'
 import { getPageData as getCityStatData } from '~/components/reports/CityStat'
+import { getPageData as getEncoreBallStatData } from '~/components/reports/EncoreBallStat'
 import { getPageData as getGuestStatData } from '~/components/reports/GuestStat'
 import { getPageData as getRandomSongStat3Data } from '~/components/reports/RandomSongStat3'
 import type { Concert, ConcertSelectType } from '~/data/types'
@@ -46,6 +47,7 @@ const getPageData = (options: {
   const cityStatData = getCityStatData({ selectedConcertDetails, selectedCoord })
   const randomSongStat3Data = getRandomSongStat3Data({ selectedConcertDateTypeMap })
   const guestStatData = getGuestStatData({ selectedConcertDetails })
+  const encoreBallStatData = getEncoreBallStatData({ selectedConcertDateTypeMap })
   return {
     selectConcertItemList: selectedConcertDetails.map((concert) => ({
       date: removeYearFromDate(concert.date),
@@ -60,6 +62,8 @@ const getPageData = (options: {
     selectedTopRandomSongList: randomSongStat3Data.selectedTopRandomSongList,
     selectedNicheRandomSongList: randomSongStat3Data.selectedNicheRandomSongList,
     allListenedGuestList: guestStatData.allListenedGuestList,
+    listenedBallColorList: encoreBallStatData.listenedBallColorList,
+    hasAttendedBirthday: Object.keys(selectedConcertDateTypeMap).some((date) => date.includes('2025.03.29')),
   }
 }
 
@@ -142,7 +146,12 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
         </div>
 
         {/* City Stamp Area */}
-        {data.allListenedCityList.length > 0 && <CityStampArea cityList={data.allListenedCityList} />}
+        {data.allListenedCityList.length > 0 && (
+          <StampArea
+            bonusStamp={{ birthday: data.hasAttendedBirthday, carrot: data.listenedBallColorList.length >= 9 }}
+            cityList={data.allListenedCityList}
+          />
+        )}
 
         {/* Footer */}
         {/* <div className="border-black border-t" /> */}
@@ -157,7 +166,13 @@ const Receipt: React.FC<ReceiptProps> = ({ ref }) => {
   )
 }
 
-const CityStampArea: React.FC<{ cityList: string[] }> = ({ cityList }) => {
+const StampArea: React.FC<{
+  cityList: string[]
+  bonusStamp: {
+    birthday: boolean
+    carrot: boolean
+  }
+}> = ({ cityList, bonusStamp }) => {
   // 为每个城市生成固定的随机角度（基于城市名）
   const getRotation = (city: string, index: number) => {
     // 使用城市名和索引生成一个简单的伪随机数，确保每次渲染角度一致
@@ -174,18 +189,38 @@ const CityStampArea: React.FC<{ cityList: string[] }> = ({ cityList }) => {
     return { x, y }
   }
 
+  // 伪随机数生成器，基于字符串生成稳定的随机值
+  const seededRandom = (str: string) => {
+    const hash = str.split('').reduce((acc, char) => {
+      return (acc * 31 + char.charCodeAt(0)) % 2_147_483_647
+    }, 0)
+    const x = Math.sin(hash) * 10_000
+    return x - Math.floor(x)
+  }
+
+  // 最终 stamp 列表，场馆 + bonus 乱序排列
+  const finalStampImgList = [
+    ...cityList.map(
+      // ohh typo
+      (city) => `${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/stadim-monochrome/${cityImgIdMap[city]}.webp`
+    ),
+    ...(bonusStamp.birthday ? [`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/bonus-stamp/birthday.webp`] : []),
+    ...(bonusStamp.carrot ? [`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/bonus-stamp/carrot.webp`] : []),
+  ].sort((a, b) => seededRandom(a + b) - 0.5)
+
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 py-4 opacity-60">
-      {cityList.map((city, index) => {
-        const translate = getTranslate(city, index)
+      {finalStampImgList.map((imgUrl, index) => {
+        const translate = getTranslate(imgUrl, index)
         return (
           <img
-            alt={city}
+            alt={imgUrl}
             className="max-w-1/5 object-contain"
-            key={city}
-            src={`${import.meta.env.VITE_STATIC_FILE_HOST}/5526-assets/stadim-monochrome/${cityImgIdMap[city]}.webp`}
+            height={50}
+            key={imgUrl}
+            src={imgUrl}
             style={{
-              transform: `translate(${translate.x}px, ${translate.y}px) rotate(${getRotation(city, index)}deg)`,
+              transform: `translate(${translate.x}px, ${translate.y}px) rotate(${getRotation(imgUrl, index)}deg)`,
             }}
             width={50}
           />
